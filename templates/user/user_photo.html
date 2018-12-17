@@ -1,0 +1,105 @@
+{% extends 'user/base.html' %}
+
+{% block page_style %}
+<link href="https://a0.muscache.com/airbnb/static/packages/dls/common_o2.1_cereal-5b1258a20d28a7001c7107711f62b5f1.css"
+    media="all" rel="stylesheet" type="text/css" />
+<link href="https://a0.muscache.com/airbnb/static/packages/common-7d0f582f30cdc661f9c474f22e4da235.css" media="all" rel="stylesheet"
+    type="text/css" />
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="page-container-responsive space-top-4 space-4">
+    <div class="row">
+        {% include 'user/user_sidebar.html' %}
+        <div class="col-md-9">
+
+            <div id="dashboard-content">
+
+                <div class="panel space-4">
+                    <div class="panel-header">
+                        <h1 class="edit-profile-section-heading">
+                            Profile Photo
+                        </h1>
+                    </div>
+                    <div class="panel-body photos-section">
+                        <div class="row">
+                            <div class="col-lg-4 text-center">
+                                <div class="profile_pic_container picture-main space-sm-2 space-md-2" data-picture-id="420886931">
+                                    <div class="media-photo profile-pic-background">
+                                        <img height="225" src="{{ user.avatar.url }}" width="225">
+                                    </div>
+                                    <div class="media-photo media-round" aria-hidden="true">
+                                        <img height="225" src="{{ user.avatar.url }}" width="225">
+                                    </div>
+                                    <button class="picture-tile-delete overlay-btn" style="display:none;">
+                                        <i class="icon icon-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <ul class="list-layout picture-tiles clearfix ui-sortable">
+                                    <li class="picture-tile pull-left space-2">
+                                        <img src="{{ user.avatar.url }}" width="50" height="50" alt="Profile photo 1">
+                                        <button class="picture-tile-delete overlay-btn" style="display:none;">
+                                            <i class="icon icon-trash"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+
+                                <p>
+                                    Clear frontal face photos are an important way for hosts and guests to learn about
+                                    each other. It’s not much fun to host a landscape!
+                                    Be sure to use a photo that clearly shows your face and doesn’t include any
+                                    personal or sensitive info you’d rather not have hosts or guests see.
+                                </p>
+
+                                <div class="row row-condensed">
+                                    <div class="">
+                                        <span class="file-input-container">
+                                            <form action="{% url 'upload_user_photo' %}" enctype="multipart/form-data"
+                                                method="post" id="avatar_upload">
+                                                <div style="margin:0;padding:0;display:inline">
+                                                    <label class="btn btn-block btn-large" onclick="fileSelect();">Upload
+                                                        a file from your computer</label>
+                                                    <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();">
+                                                </div>
+                                            </form>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token }}'
+        }
+    });
+
+    function fileSelect() {
+        $('#fileToUpload').click();
+    }
+
+    function fileSelected() {
+        var options = {
+            type: 'POST',
+            success: function (data) {
+                // console.log(data);
+                location.reload();
+            }
+        }
+        $('#avatar_upload').ajaxSubmit(options);
+    }
+</script>
+{% endblock %}

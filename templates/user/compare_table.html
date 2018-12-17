@@ -1,0 +1,126 @@
+{% extends "user/base.html" %}
+
+{% block page_style %}
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/app/media/static/assets/reset.css"> <!-- CSS reset -->
+<link rel="stylesheet" href="/app/media/static/assets/style.css"> <!-- Resource style -->
+<script src="/app/media/static/assets/modernizr.js"></script> <!-- Modernizr -->
+
+<style>
+    /* rating star */
+
+    .star-ratings-sprite {
+        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+        font-size: 0;
+        height: 21px;
+        line-height: 0;
+        overflow: hidden;
+        text-indent: -999em;
+        width: 110px;
+        margin: 0 auto;
+    }
+
+    .star-ratings-sprite-rating {
+        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+        background-position: 0 100%;
+        float: left;
+        height: 21px;
+        display: block;
+    }
+
+    .star {
+        margin-top: 4px;
+    }
+</style>
+
+{% endblock %}
+
+{% block body_contents %}
+<!-- <section class="cd-intro">
+		<h1>Property Comparison</h1>
+	</section> -->
+
+<section class="cd-products-comparison-table">
+	<header>
+		<div class="actions">
+			<a onclick="remove();">Remove</a>
+			<a href="#0" class="reset">Reset</a>
+			<a href="#0" class="filter">Filter</a>
+		</div>
+	</header>
+
+	<div class="cd-products-table">
+		<div class="features">
+			<div class="top-info">Property</div>
+			<ul class="cd-features-list">
+				<li>Daily Price</li>
+				<li>Customer Rating</li>
+				<li>Clean Fee</li>
+				<li>Bathroom Number</li>
+				<li>Maximum Tenant</li>
+				<li>Maximum Bed Number</li>
+				<li>Room Number</li>
+				<li>Location</li>
+			</ul>
+		</div>
+
+		<div class="cd-products-wrapper">
+			<ul class="cd-products-columns">
+				
+				{% for property in properities %}
+				<li class="product" pid="{{ property.id }}">
+					<div class="top-info">
+						<div class="check"></div>
+						<img src="{{ property.image }}" alt="product image">
+						<h3><a href="{% url 'property_details' property.id %}">{{property.name}}</a></h3>
+					</div> <!-- .top-info -->
+
+					<ul class="cd-features-list">
+						<li>${{property.daily_price}}</li>
+						<!-- <li class="rate"><span>5/5</span></li> -->
+						<li>
+							<div class="star">
+								<div class="star-ratings-sprite"><span style="width:{{ property.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+							</div>
+						</li>
+						<li>${{property.clean_fee}}</li>
+						<li>{{property.bathroom_number}} bath room</li>
+						<li>{{property.maximum_tenant}} tenant</li>
+						<li>{{property.maximum_bed_number}} bed</li>
+						<li>{{property.room_number}} room</li>
+						<li>{{property.address}}</li>
+					</ul>
+				</li> <!-- .product -->
+				{% endfor %}
+
+			
+			</ul> <!-- .cd-products-columns -->
+		</div> <!-- .cd-products-wrapper -->
+
+		<ul class="cd-table-navigation">
+			<li><a href="#0" class="prev inactive">Prev</a></li>
+			<li><a href="#0" class="next">Next</a></li>
+		</ul>
+	</div> <!-- .cd-products-table -->
+</section> <!-- .cd-products-comparison-table -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/app/media/static/assets/main.js"></script> <!-- Resource jQuery -->
+{% endblock %}
+
+{% block scripts %}
+<script>
+	function remove() {
+		var selectedObjects = $('.selected');
+		selectedObjects.each(function(index){
+			var product = $(this);
+			console.log(product.attr('pid'));
+			$.get("{% url 'remove_from_cart' %}?pid="+product.attr('pid'), function(data, status) {
+				if(data == '1') {
+					product.remove();
+				}
+			});
+		});
+	}
+</script>
+{% endblock %}

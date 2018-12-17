@@ -1,0 +1,534 @@
+{% extends 'user/base.html' %}
+
+{% block page_style %}  
+  <style>
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      background-color: silver;
+    }
+
+    .button_2 {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color ease 0.2s;
+    }
+
+    .button_2:hover,
+    button:focus {
+      background-color: #4cceea;
+      border-radius: 50%;
+    }
+
+    .button_id_submit {
+      border-radius: 50%;
+      height: 38px;
+      width: 38px;
+      color: grey;
+    }
+
+    .button_id_submit .fa-paper-plane {
+      color: grey;
+      transition: color ease 0.2s;
+    }
+
+    .button_id_submit:hover .fa-paper-plane {
+      color: white;
+    }
+
+
+    /* Modal window */
+
+    .modal__sidebar {
+      flex: 0 0 268px;
+      background-color: #eff0f5;
+    }
+
+    .modal__main {
+      flex: 1 1 auto;
+    }
+
+
+
+    /* Chat window */
+
+    .chat {
+      display: flex;
+      background-color: white;
+      box-shadow: 0 0 32px rgba(0, 1, 3, 0.15);
+    }
+
+    .chat__search {
+      padding: 23px 23px 13px 21px;
+    }
+
+    .chat__search:after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 22px;
+      right: 24px;
+      height: 2px;
+      opacity: 0.25;
+      background-color: #b8bbc8;
+    }
+
+    .chat__users {
+      padding: 18px 19px 22px 15px;
+    }
+
+
+    /* Users block */
+
+    .users {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .users__item {
+      display: flex;
+      align-items: center;
+      padding: 9px 7px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .users__item:hover {
+      background-color: #e3e5eb;
+    }
+
+    .users__avatar {
+      flex: 0 0 35px;
+    }
+
+    .users__note {
+      line-height: 18px;
+      color: #828697;
+      font-weight: 500;
+      margin-left: 16px;
+    }
+
+    .users__counter {
+      padding: 7px 6px;
+      border-radius: 9px;
+      margin-left: 11px;
+      background-color: #b8bbc8;
+      min-width: 13px;
+      text-align: center;
+      flex: 0 0 auto;
+    }
+
+    .users__item_group .users__avatar {
+      background-color: #4cceea;
+    }
+
+    .users__item_group .users__note {
+      color: #4cceea;
+    }
+
+    .users__item_group .users__counter {
+      background-color: #4cceea;
+    }
+
+
+    /* Chatbox */
+
+    .chatbox {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 530px;
+      table-layout: fixed;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 26px;
+      position: relative;
+    }
+
+    .chatbox__row {
+      display: block;
+    }
+
+    .chatbox__row_fullheight {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .head {
+      display: inline-flex;
+      position: relative;
+      width: 100%;
+      align-items: center;
+      padding: 11px 0 13px 0;
+    }
+
+    .head:after {
+      background-color: #edeef1;
+      height: 2px;
+      width: 100%;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 100%;
+    }
+
+    .head__avatar.avatar {
+      position: relative;
+      background-color: #4cceea;
+    }
+
+    .head__title {
+      color: #5b6171;
+      font-size: 18px;
+      font-weight: 400;
+      margin-left: 21px;
+      padding-top: 3px;
+    }
+
+    .head__note {
+      color: #a0a3b1;
+      font-size: 14px;
+      font-weight: 400;
+      margin-left: auto;
+      padding-right: 18px;
+      padding-top: 3px;
+    }
+
+    .head__icon {
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #d2d4da;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+
+    .chatbox__content {
+      height: 100%;
+    }
+
+
+    /* message block */
+
+    .message__head {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 80px 10px 82px;
+    }
+
+    .message__note {
+      opacity: 0.5;
+      color: #5b6171;
+      font-size: 10px;
+    }
+
+    .message__base {
+      display: inline-flex;
+      width: 100%;
+      align-items: center;
+    }
+
+    .message__textbox {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+      width: max-content%;
+      min-height: 43px;
+      background-color: #f5f6fa;
+      border-radius: 9px;
+      padding: 11px 25px 12px 25px;
+      color: #6a6d77;
+    }
+
+    .message__smiley {
+      margin-right: 3px;
+    }
+
+    .message__smiley:last-child {
+      margin-right: 0;
+    }
+
+    .message__text + .message__smiley {
+      margin-left: 4px;
+    }
+
+    .avatar_2 {
+      border-radius: 50%;
+      position: relative;
+      border: none;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 700;
+      background-color: #b8bbc8;
+    }
+
+    .avatar_larger {
+      width: 43px;
+      height: 43px;
+    }
+
+    .avatar__wrap {
+      border-radius: 50%;
+      text-decoration: none;
+      display: inherit;
+      color: #fff;
+    }
+
+    .avatar__img {
+      border-radius: 50%;
+    }
+
+    .counter_2 {
+      line-height: 11px;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      display: block;
+    }
+
+
+    /* enter block */
+
+    .enter {
+      position: relative;
+      padding-top: 12px;
+      padding-bottom: 14px;
+    }
+
+    .enter:before {
+      background-color: #edeef1;
+      height: 2px;
+      width: 100%;
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+    }
+
+    .enter__submit {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      /* border: 2px solid #e2e3e7; */
+      border-radius: 50%;
+      background-color: #fff;
+      text-align: center;
+      /* padding: 0px 15px 20px 0px; */
+      /* margin-right: -5px; */
+    }
+
+    .enter__textarea {
+      padding-right: 50px;
+    }
+
+    .enter__textarea textarea {
+      width: 100%;
+      border: none;
+      resize: none;
+    }
+
+    .enter__icons {
+      padding-right: 0px;
+      font-size: 0;
+      display: flex;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .enter__icons .fa-paperclip {
+      font-size: 16px;
+      color: grey;
+    }
+
+    .enter__icons .fa-smile-o {
+      font-size: 16px;
+      color: grey;
+    }
+
+    .enter__icon {
+      margin-right: -12px;
+    }
+
+  </style>
+
+
+<link href="https://a0.muscache.com/airbnb/static/packages/dls/common_o2.1_cereal-5b1258a20d28a7001c7107711f62b5f1.css"
+    media="all" rel="stylesheet" type="text/css" />
+<link href="https://a0.muscache.com/airbnb/static/packages/common-7d0f582f30cdc661f9c474f22e4da235.css" media="all" rel="stylesheet"
+    type="text/css" />
+
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="page-container-responsive space-top-4 space-4">
+    <div class="row">
+        {% include 'user/user_sidebar.html' %}
+        <div class="col-md-9">
+              <div class="chat">
+                <div class="modal__sidebar">
+                  <div class="chat__users">
+                    <ul class="users">
+                      {% for u in messages %}
+                      <li class="users__item users__item_group" onclick="switch_to('{{ u.id }}');">
+                        <div class="users__avatar avatar_2">
+                            <a class="avatar__wrap">
+                              <img class="avatar__img" src="/app/media/{{ u.avatar }}" width="35" height="35" alt="avatar image">
+                            </a>
+                        </div>
+                        <span class="users__note">{{ u.username }}</span>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <div class="modal__main">
+                  <div class="chatbox">
+                    <div class="chatbox__row">
+                      {% for u in messages %}
+                      <div class="head" id="head_{{ u.id }}" style={% ifnotequal u.id first %} "display:none;" {% else %} "display:inline-flex" {% endifnotequal %}>
+                        <div class="head__avatar avatar_2 avatar_larger">
+                          <a href="#" class="avatar__wrap">
+                            <img class="avatar__img" src="/app/media/{{ u.avatar }}" width="35" height="35" alt="avatar image">
+                          </a>
+                        </div>
+                        <div class="head__title">{{ u.username }}</div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                    <div class="chatbox__row chatbox__row_fullheight">
+                      {% for u,msgs in messages.items %}
+                      <div class="chatbox__content" id="content_{{ u.id }}" style={% ifnotequal u.id first %} "display:none;" {% else %} "display:block" {% endifnotequal %}>
+                        {% for m in msgs %}
+                          {% ifequal m.senderID_id user.id %}
+                            <div class="message">
+                              <div class="message__head" style="justify-content: flex-end;">
+                                <span class="message__note">{{ m.time_stamp }}</span>
+                              </div>
+                              <div class="message__base" style="justify-content: flex-end;">
+                                <div class="message__textbox" style="margin-right: 15px;">
+                                  <span class="message__text">{{ m.content }}</span>
+                                </div>
+                                <div class="message__avatar avatar_2">
+                                    <a href="#" class="avatar__wrap">
+                                      <img class="avatar__img" src="/app/media/{{ user.avatar }}" width="35" height="35" alt="avatar image">
+                                    </a>
+                                  </div>
+                              </div>
+                            </div>
+                          {% else %}
+                            <div class="message">
+                              <div class="message__head">
+                                <span class="message__note">{{ m.time_stamp }}</span>
+                              </div>
+                              <div class="message__base">
+                                <div class="message__avatar avatar_2">
+                                  <a href="#" class="avatar__wrap">
+                                    <img class="avatar__img" src="/app/media/{{ u.avatar }}" width="35" height="35" alt="avatar image">
+                                  </a>
+                                </div>
+                                <div class="message__textbox">
+                                  <span class="message__text">{{ m.content }}</span>
+                                </div>
+                              </div>
+                            </div>
+                          {% endifequal %}
+                        {% endfor %}
+                      </div>
+                      {% endfor %}
+                    </div>
+                    <br>
+                    <div class="chatbox__row">
+                      <div class="enter">
+                        <div class="enter__submit">
+                          <button class="button_2 button_id_submit" type="submit" onclick="send_msg();">
+                              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                          </button>
+                        </div>
+                        <div class="enter__textarea">
+                          <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="Say something..." style="border: solid 1px rgb(236, 233, 233)"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+  var current = '{{ first }}';
+  var h_pre = '#head_';
+  var c_pre = '#content_';
+  var content = '';
+  function switch_to(id) {
+    $(h_pre+current).css('display', 'none');
+    $(c_pre+current).css('display', 'none');
+    $(h_pre+id).css('display', 'inline-flex');
+    $(c_pre+id).css('display', 'block');
+    current = id;
+  }
+  function send_msg() {
+    content = $('#enterMessage').val();
+    $.post("{% url 'send_to' %}", 
+    {
+        receiver: current,
+        msg:content
+    },function(data, status) {
+        if(data == '1') {
+          $(c_pre+current).append(
+          '<div class="message"> \
+            <div class="message__head" style="justify-content: flex-end;"> \
+              <span class="message__note"></span> \
+            </div> \
+            <div class="message__base" style="justify-content: flex-end;"> \
+              <div class="message__textbox" style="margin-right: 15px;"> \
+                <span class="message__text"> '+ content +' </span> \
+              </div> \
+              <div class="message__avatar avatar_2"> \
+                  <a href="#" class="avatar__wrap"> \
+                    <img class="avatar__img" src="/app/media/{{ user.avatar }}" width="35" height="35" alt="avatar image"> \
+                  </a> \
+                </div> \
+            </div> \
+          </div>'
+          );
+          $('#enterMessage').val('');
+        } else {
+          alert('send failed');
+        }
+    });
+  }
+</script>
+
+{% endblock %}
+

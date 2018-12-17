@@ -1,0 +1,594 @@
+{% extends 'user/base.html' %}
+
+
+{% block page_style %}
+
+<style>
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    h1 {
+        text-align: center;
+        font-weight: 300;
+        color: #777
+    }
+
+    h1 span {
+        font-weight: 600;
+    }
+
+    .container_2 {
+        width: 100%;
+        padding: 20px 0;
+        margin: 10px auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .container_2:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -1px;
+        width: 2px;
+        height: 100%;
+        background: rgb(206, 205, 205);
+        z-index: 1
+    }
+
+    .timeline-block {
+        width: -webkit-calc(50% + 8px);
+        width: -moz-calc(50% + 8px);
+        width: calc(50% + 8px);
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -moz-box-pack: justify;
+        justify-content: space-between;
+        clear: both;
+    }
+
+    .timeline-block-right {
+        float: right;
+    }
+
+    .timeline-block-left {
+        float: left;
+        direction: rtl;
+    }
+
+    .marker {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid #F5F7FA;
+        background: #ff5a5f;
+        margin-top: 10px;
+        z-index: 1999;
+    }
+
+    .marker_2 {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #F5F7FA;
+    background: gray;
+    margin-top: 10px;
+    z-index: 1999;
+    }
+
+    .timeline-content {
+        width: 95%;
+        padding: 10px;
+        color: #666;
+        background: #ffffff;
+    }
+
+    .timeline-content h3 {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 25px;
+        font-weight: 500
+    }
+
+    .timeline-content span {
+        font-size: 15px;
+        color: #a4a4a4;
+    }
+
+    .timeline-content p {
+        font-size: 14px;
+        line-height: 1.5em;
+        word-spacing: 1px;
+        color: #888;
+    }
+
+
+    @media screen and (max-width: 768px) {
+        .container_2:before {
+            left: 8px;
+            width: 2px;
+        }
+
+        .timeline-block {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .timeline-block-right {
+            float: none;
+        }
+
+        .timeline-block-left {
+            float: none;
+            direction: ltr;
+        }
+
+
+
+
+        /* Input Styles */
+
+        .form{
+            width: 100%;
+            padding: 15px;
+            background:#f8f8f8;
+            border:1px solid rgba(0, 0, 0, 0.075);
+            margin-bottom:25px;
+            color:#727272 !important;
+            font-size:13px;
+            -webkit-transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            transition: all 0.4s;
+        }
+
+        .form:hover{
+            border:1px solid #8BC3A3;
+        }
+
+        .form:focus{
+            color: white;
+            outline: none;
+            border:1px solid #8BC3A3;
+        }
+
+        .textarea{
+            height: 200px;
+            max-height: 200px;
+            max-width: 100% !important;
+        }
+        
+        /* Generic Button Styles */
+
+        .button{
+            padding:8px 12px;
+            background:#0A5175;
+            display: block;
+            width:120px;
+            margin:10px 0 0px 0;
+            border-radius:3px;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+            text-align:center;
+            font-size:0.8em;
+            box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+            -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+            -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        }
+
+        .button:hover{
+            background:#8BC3A3;
+            color:white;
+        }
+
+        /* Send Button Styles */
+
+        .form-btn{
+            width:180px;
+            display: block;
+            height: auto;
+            padding:15px;
+            color:#fff;
+            background:#8BC3A3;
+            border:none;
+            border-radius:3px;
+            outline: none;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+            margin:auto;
+            box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+            -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+            -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        }
+
+        .form-btn:hover{
+            background:#111;
+            color: white;
+            border:none;
+        }
+
+        .form-btn:active{
+            opacity: 0.9;
+        }
+        center{
+        margin-top:330px;
+        }
+        input {
+            position: relative;
+            z-index: 9999;
+        }
+
+        .comment-right {
+            position: absolute; 
+            right: 10px; top: 30px;
+        }
+    }
+
+    /* comment */
+
+    .pop-window {
+    width: 500px;
+    z-index: 2999;
+    background: #fff;
+    margin: 0 auto;
+    border: 2px solid #cdcdcd;
+    padding: 20px;
+    position: fixed;
+    top: 30%;
+    left: 33%;
+    }
+
+    .container {
+    margin: 0 auto;
+    }
+
+    .overlay {
+    z-index: 1999;
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    }
+
+    .close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #000;
+    cursor: pointer;
+    }
+
+
+
+    /* Comment Input Styles */
+
+    .form{
+        width: 100%;
+        padding: 15px;
+        background:#f8f8f8;
+        border:1px solid rgba(0, 0, 0, 0.075);
+        margin-bottom:10px;
+        color:#727272 !important;
+        font-size:13px;
+        -webkit-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+    }
+
+    .form:hover{
+        border:1px solid #8BC3A3;
+    }
+
+    .form:focus{
+        color: white;
+        outline: none;
+        border:1px solid #8BC3A3;
+    }
+
+    .textarea{
+        height: 200px;
+        max-height: 180px;
+        max-width: 93%;
+    }
+    
+    /* Comment Generic Button Styles */
+
+    .button{
+        padding:8px 12px;
+        background:#0A5175;
+        display: block;
+        width:120px;
+        margin:20px 0 0px 0;
+        border-radius:3px;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        text-align:center;
+        font-size:0.8em;
+        box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+    }
+
+    .button:hover{
+        background:#8BC3A3;
+        color:white;
+    }
+
+    /* Comment Send Button Styles */
+
+    .form-btn{
+        width:180px;
+        display: block;
+        height: auto;
+        padding:15px;
+        color:#fff;
+        background:#8BC3A3;
+        border:none;
+        border-radius:3px;
+        outline: none;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        margin:auto;
+        box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+    }
+
+    .form-btn:hover{
+        background:#111;
+        color: white;
+        border:none;
+    }
+
+    .form-btn:active{
+        opacity: 0.9;
+    }
+    center{
+    margin-top:330px;
+    }
+    input {
+        position: relative;
+        z-index: 9999;
+    }
+
+
+    /* add rating */
+
+    .rating {
+    display: inline-block;
+    position: relative;
+    right: 0;
+    height: 20px;
+    line-height: 20px;
+    font-size: 20px;
+    }
+
+    .rating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+    }
+
+    .rating label:last-child {
+    position: static;
+    }
+
+    .rating label:nth-child(1) {
+    z-index: 5;
+    }
+
+    .rating label:nth-child(2) {
+    z-index: 4;
+    }
+
+    .rating label:nth-child(3) {
+    z-index: 3;
+    }
+
+    .rating label:nth-child(4) {
+    z-index: 2;
+    }
+
+    .rating label:nth-child(5) {
+    z-index: 1;
+    }
+
+    .rating label input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    }
+
+    .rating label .icon {
+    float: left;
+    color: transparent;
+    }
+
+    .rating label:last-child .icon {
+    color: lightgray;
+    }
+
+    .rating:not(:hover) label input:checked ~ .icon,
+    .rating:hover label:hover input ~ .icon {
+    color: #FF912C;
+    }
+
+    .rating label input:focus:not(:checked) ~ .icon:last-child {
+    color: lightgray;
+    text-shadow: 0 0 5px #FF912C;
+    }
+
+</style>
+<link href="https://a0.muscache.com/airbnb/static/packages/dls/common_o2.1_cereal-5b1258a20d28a7001c7107711f62b5f1.css"
+    media="all" rel="stylesheet" type="text/css" />
+<link href="https://a0.muscache.com/airbnb/static/packages/common-7d0f582f30cdc661f9c474f22e4da235.css" media="all" rel="stylesheet"
+    type="text/css" />
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="page-container-responsive space-top-4 space-4">
+    <div class="row">
+        {% include 'user/user_sidebar.html' %}
+        <div class="col-md-9">
+            <h1>My Trips</h1>
+            <div class="container_2">
+                {% for b in booking %}
+                <div class="timeline-block {% if forloop.counter|divisibleby:2 %}timeline-block-left{% else %}timeline-block-right{% endif %}">
+                    <div class="{% ifequal b.1 0%}marker{% else %}marker_2{% endifequal %}"></div>
+                    <div class="timeline-content" style="text-align: left;">
+                        <h4 style="margin-bottom:5px; text-align: left;"><a href="{% url 'property_details' b.0.propertyID.id %}">{{ b.0.propertyID.name }}</a>
+                            {% ifequal b.0.commented False %}
+                            {% ifequal b.1 0%}
+                            <a style="float: right; z-index: 1000;"><i class="fa fa-lg fa-comment" style="color:rgb(173, 172, 172);" onclick="addComment('{{ b.0.propertyID.id }}', '{{ b.0.id }}');"></i></a>
+                            {% endifequal %}
+                            {% endifequal %}
+                        </h4>
+                        <span>{{ b.0.start_date }}</span>
+                            <div class="media-photo">
+                                <img width="100%" src="{{ b.0.propertyID.image }}">
+                            </div>
+                        <h5 style="margin: 5px 0px 0px 0px; text-align: left;">Your home at : {{ b.0.propertyID.city }}
+                        </h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="pop-window" style="display: none;">
+            <div class="inner">
+                <div class="contact-form">
+                    <!-- Right Inputs -->
+                    <div class="col-xs-12 wow animated slideInRight" data-wow-delay=".5s">
+                        <!-- Message -->
+                        <textarea name="message" id="message" class="form textarea" style="max-width: 100%;" placeholder="Leave your comment..."></textarea>
+                    </div><!-- End Right Inputs -->
+                        <div class="col-xs-12" style="margin-top: -10px;">
+                        <div class="rating">
+                            <label>
+                                <input type="radio" name="stars" value="1" />
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="2" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="3" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>   
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="4" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="5" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="relative fullwidth col-xs-12">
+                        <!-- Send Button -->
+                        <button class="form-btn semibold" style="margin-top: 20px;" onclick="send_reply();">Send</button> 
+                    </div><!-- End Bottom Submit -->
+                    <!-- Clear -->
+                    <div class="clear"></div>
+                
+                </div><!-- End Contact Form Area -->
+            </div>
+        <!-- <div class="close">x</div> -->
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+    var oid = -1;
+    var pid = -1;
+    var star_rate = 5;
+    var $overlay = $('<div class="overlay"></div>');
+    var $popup = $('.pop-window');
+    
+    // $('<div class="close">x</div>').appendTo($popup);
+    // $popup.hide();
+    
+    function addComment(p_id, o_id) {
+        $overlay.fadeIn(800).appendTo('body');
+        $popup.delay(800).slideDown();
+        oid = o_id;
+        pid = p_id;
+    };
+    
+    $overlay.click(function () {
+        $overlay.delay(800).fadeOut();
+        $popup.slideUp();
+    });
+    
+    $('.close').click(function () {
+        $popup.slideUp();
+        $overlay.delay(800).fadeOut();
+    });
+    
+</script>
+
+<script>
+    $(':radio').change(function() {
+        console.log('New star rating: ' + this.value);
+        star_rate = this.value*20;
+    });
+
+    function send_reply() {
+        var msg = $('#message').val();
+        $.post("{% url 'send_reply' %}", 
+        {
+            p_id: pid,
+            o_id: oid,
+            msg: msg,
+            star_rate: star_rate
+        },function(data, status) {
+            if(data == '1') {
+                $('#message').val('');
+                alert("send succeed!");
+                $overlay.delay(800).fadeOut();
+                $popup.slideUp();
+            } else {
+                alert('send failed');
+            }
+        });
+    }
+</script>
+
+{% endblock %}

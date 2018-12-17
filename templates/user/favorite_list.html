@@ -1,0 +1,125 @@
+{% extends 'user/base.html' %}
+
+{% block page_style %}
+<link href="https://a0.muscache.com/airbnb/static/packages/dls/common_o2.1_cereal-5b1258a20d28a7001c7107711f62b5f1.css"
+    media="all" rel="stylesheet" type="text/css" />
+<link href="https://a0.muscache.com/airbnb/static/packages/common-7d0f582f30cdc661f9c474f22e4da235.css" media="all" rel="stylesheet"
+    type="text/css" />
+
+<style>
+    .block-with-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;  
+    }
+
+/* rating star */
+
+.star-ratings-sprite {
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+    font-size: 0;
+    height: 21px;
+    line-height: 0;
+    overflow: hidden;
+    text-indent: -999em;
+    width: 110px;
+    margin: 0 auto;
+}
+
+.star-ratings-sprite-rating {
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+    background-position: 0 100%;
+    float: left;
+    height: 21px;
+    display: block;
+}
+
+.star {
+    margin-top: 4px;
+}
+</style>
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="page-container-responsive space-top-4 space-4">
+    <div class="row">
+        {% include 'user/user_sidebar.html' %}
+        <div class="col-md-9">
+
+            <div id="dashboard-content">
+                {% for entry in favourites %}
+                <div class="panel space-4">
+                    <div class="panel-header">
+                        <a href="{% url 'property_details' entry.propertyID.id %}">
+                            <h1 class="edit-profile-section-heading">
+                                {{ entry.propertyID.name }}
+                            </h1>
+                        </a>
+                    </div>
+                    <div class="panel-body photos-section">
+                        <div class="row">
+                            <div class="col-lg-4 text-center">
+                                <div class="profile_pic_container picture-main space-sm-2 space-md-2" data-picture-id="420886931">
+                                    <div class="media-photo" aria-hidden="true">
+                                        <img width="230" src="{{ entry.propertyID.image }}">
+                                    </div>
+                                    <button class="picture-tile-delete overlay-btn" style="display:none;">
+                                        <i class="icon icon-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="block-with-text">
+                                <p style="margin-bottom: 0;">
+                                    {{ entry.propertyID.description }}
+                                </p>
+                                </div>
+                                <div class="row" style="margin-top: 15px;">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="star">
+                                            <div class="star-ratings-sprite"><span style="width:{{ entry.propertyID.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <p class="lead float-right">
+                                            ${{ entry.propertyID.daily_price }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{# csrf_token() #}'
+        }
+    });
+
+    function fileSelect() {
+        $('#fileToUpload').click();
+
+    }
+
+    function fileSelected() {
+        var options = {
+            type: 'POST',
+            success: function (data) {
+                location.reload();
+            }
+        }
+        $('#avatar_upload').ajaxSubmit(options);
+    }
+</script>
+{% endblock %}

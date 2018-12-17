@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+
+    <title>BeerAnA - BigLottery</title>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* .view-photo-div {
+            position: relative; 
+            background-image: url(https://a0.muscache.com/im/pictures/17262962/cafac20d_original.jpg?aki_policy=xx_large&quot;); 
+            background-size: cover; 
+            background-position: center center; 
+            height: 320px;
+        } */
+
+        /* .view-photo-slide {
+            position: relative; 
+            size: cover; 
+            position: center center;
+            height: 400px;
+        } */
+
+        /* .view-photos {
+            position: absolute; 
+            bottom: 0px; 
+            margin: 0px 0px 15px 15px; 
+            font-size: 13px; 
+            padding: 8px 20px; 
+            font-family: Poppins, sans-serif; 
+            color: rgb(72, 72, 72); 
+            font-weight: 500; 
+            border-radius: 4px; 
+            background-color: white; 
+            border: 1px solid rgb(196, 196, 196);
+        }
+
+        .view-photos:active {
+            background-color: #F0EEEE !important;
+        }
+
+        .view-photos:hover {
+            border-color: #878787 !important;
+        } */
+
+        .content {
+            margin-left: 10%; 
+            margin-right: 50px;
+        }
+
+        .general-link {
+            display: 
+            inline-block; 
+            text-decoration: none; 
+            margin: 0px 0px 10px; 
+            color: rgb(0, 132, 137); 
+            font-weight: 400; 
+            cursor: pointer;
+        }
+
+        .general-link:hover {
+            text-decoration: underline !important;
+        }
+
+        .general-link:active {
+            color: red !important;
+        }
+
+        .overview {
+            padding: 15px 0px 5px; 
+            font-family: Poppins, sans-serif;
+        }
+
+        .overview-main {
+            font-weight: 500; 
+            font-size: 15px; 
+            color: rgb(72, 72, 72);
+        }
+
+        .overview-items {
+            font-weight: 200; 
+            font-size: 15px;
+        }
+
+        .overview-separator {
+            vertical-align: middle; 
+            color: rgb(72, 72, 72);
+        }
+
+        .pattern-general-div {
+            border-top: 0.1px solid rgba(72, 72, 72, 0.3); 
+            color: rgb(72, 72, 72); 
+            font-family: Poppins, sans-serif; 
+            font-weight: 200; 
+            font-size: 16px;
+        }
+
+        .pattern-general-head-font {
+            font-weight: 500;
+        }
+
+        .property-div {
+            display: inline-block; 
+            margin: 10px 120px 20px 0px;
+        }
+
+        .property-name {
+            display: inline-block; width: 400px; 
+            margin: 0px 0px 5px; 
+            font-size: 36px; 
+            font-weight: 600; 
+            line-height: 40px;
+        }
+
+        .property-subname {
+            text-decoration: none; 
+            color: rgb(72, 72, 72); 
+            font-size: 17px;
+        }
+
+        .host-div {
+            display: inline-block; 
+            text-align: center; 
+            margin-top: 17px; 
+            vertical-align: top;
+        }
+
+        .host-avatar {
+            width: 60px; 
+            border-radius: 50px;
+        }
+
+        .host-name {
+            margin: 0px; 
+            font-size: 15px;
+        }
+
+        .facility-icons {
+            display: inline-block; 
+            padding: 10px 20px; 
+            margin: 0px 45px 0px 0px; 
+            text-align: center;
+        }
+
+        .facility-names {
+            margin: 0px 0px 5px; 
+            font-size: 14px;
+        }
+
+        .space-block {
+            display: inline-block; 
+            margin: 0px; 
+            padding: 0px; 
+            width: 300px;
+        }
+
+        .space-font-1 {
+            font-weight: 300; 
+            margin: 0px 0px 10px;
+        }
+
+        .space-font-2,.price-font-2 {
+            font-weight: 400;
+        }
+
+        .amenity-font-1,.price-font-1{
+            display: inline-block; 
+            margin: 0px 0px 10px; 
+            width: 300px;
+        }
+
+        .amenity-font-2 {
+            text-decoration: line-through; 
+            color: rgb(118, 118, 118); 
+            font-weight: 200;
+        }
+
+        #map {
+            color: aqua;
+            height: 0;
+            margin: auto 0px;
+            overflow: hidden;
+            padding-bottom: 22.25%;
+            padding-top: 20px;
+            position: relative;
+        }
+
+        /* multi function button */
+
+        .add-button {
+            z-index: 1000;
+            position: fixed;
+            right: 100px;
+            bottom: 100px;
+            width: 56px;
+            height: 56px;
+            overflow: visible;
+            -webkit-transition: transform .4s cubic-bezier(.58,-0.37,.45,1.46),
+                color 0s ease .4s,font-size .2s;
+            -moz-transition: transform .4s cubic-bezier(.58,-0.37,.45,1.46),
+                color 0s ease .4s,font-size .2s;
+            transition: transform .4s cubic-bezier(.58,-0.37,.45,1.46),
+                color 0s ease .4s,font-size .2s;
+            text-align: center;
+            line-height: 56px;
+            font-size: 28px;
+            color: rgba(255,255,255,1);
+        }
+
+        .add-button:before {
+            position: relative;
+            z-index: 1000;
+            content:"+";
+        }
+
+
+
+        .add-button:hover {
+            color: rgba(255,255,255,0.5);
+            transform: rotate(45deg);
+        }
+
+        .sub-button {
+            position: absolute;
+            display: inline-block;
+            background-color: rgba(255,64,129,0.5);
+            color: rgba(255,255,255,0);
+            width: 28px;
+            height: 28px;
+            line-height:48px;
+            font-family: "FontAwesome";
+            font-size: 12px;
+            -webkit-transition: top .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                left .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                bottom .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                right .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                width .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                height .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                transform .1s ease 0s,
+                border-radius .2s  ease .2s;
+            -moz-transition: top .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                left .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                bottom .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                right .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                width .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                height .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                transform .1s ease 0s,
+                border-radius .2s  ease .2s;
+            transition: top .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                left .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                bottom .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                right .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                width .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                height .2s cubic-bezier(.58,-0.37,.45,1.46) .2s,
+                transform .1s ease 0s,
+                border-radius .2s  ease .2s;
+        }
+
+        .tl {
+            top: 0;
+            left: 0;
+            border-radius: 28px 0 0 0;
+        }
+
+        .tr {  
+            top: 0;
+            right: 0;
+            border-radius: 0 28px 0 0;
+        }
+
+        .bl {
+            bottom: 0;
+            left: 0; 
+            border-radius: 0 0 0 28px;
+        }
+
+        .br { 
+            bottom: 0;
+            right: 0;
+            border-radius: 0 0 28px 0;
+        }
+
+
+        .tl:before {
+            content:"";
+        }
+
+        .tr:before {
+            content:"";
+        }
+
+        .bl:before {
+            content:"";
+        }
+
+        .br:before {
+            content:"";
+        }
+
+
+        .add-button:hover .sub-button {
+            width: 48px;
+            height: 48px;
+            transform: rotate(-45deg);
+            
+            color: rgba(255,255,255,1);
+            -webkit-transition: top .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                left .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                bottom .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                right .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                width .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                height .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                color .3s ease .8s,
+                transform .3s ease .8s,
+                border-radius .4s  ease .6s;
+            -moz-transition: top .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                left .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                bottom .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                right .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                width .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                height .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                color .3s ease .8s,
+                transform .3s ease .8s,
+                border-radius .4s  ease .6s;
+            transition: top .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                left .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                bottom .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                right .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                width .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                height .4s cubic-bezier(.58,-0.37,.45,1.46) .4s,
+                color .3s ease .8s,
+                transform .3s ease .8s,
+                border-radius .4s  ease .6s;
+        }
+
+        .add-button:hover .tl {
+            top: -25px;
+            left: -25px;
+            border-radius: 28px;
+        }
+
+        .add-button:hover .tr {  
+            top: -25px;
+            right: -25px;
+            border-radius: 28px;
+        }
+
+        .add-button:hover .bl {
+            bottom: -25px;
+            left: -25px; 
+            border-radius: 28px;
+        }
+
+        .add-button:hover .br { 
+            bottom: -25px;
+            right: -25px;
+            border-radius: 28px;
+        }
+
+        /* slide show */
+
+        .mySlides {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            overflow: hidden;
+        }
+        .mySlides img {
+            flex-shrink: 0;
+            min-width: 100%;
+            min-height: 100%
+        }
+
+        /* .slide-size {
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+        } */
+
+        /* Next & previous buttons */
+        .prev, .next {
+            z-index: 10;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -200px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        /* Fading animation */
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 2.5s;
+            animation-name: fade;
+            animation-duration: 2.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+            .prev, .next,.text {font-size: 11px}
+        }
+
+        /* comments */
+
+
+        /* @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600); */
+
+
+        .comment{
+            /* width:90vw; */
+            padding:5px;
+            margin:20px auto 0 auto;
+            display: inline-block;
+            color: rgb(72, 72, 72); 
+            font-family: Poppins, sans-serif; 
+            font-weight: 200; 
+            font-size: 16px;
+        }
+
+        .comment-content{
+            float:left;
+            margin:0 0 0 10px;
+            width:75vw;
+        }
+
+        .comment-content > span{
+            line-height:150%;
+            color:#444;
+            background:#f5f5f5;
+            display:block;
+            width:100%;
+            padding:10px 15px 10px 15px;
+            font-size:.9em;
+            display:block;
+            position:relative;
+            border-radius:3px;
+            /* box-shadow:1px 1px 3px rgba(0,0,0,.3); */
+        }
+
+        .comment-content > span:before{
+            /* content:''; */
+            position:absolute;
+            top:28px;
+            left:-28px;
+            display:block;
+            width:0;
+            height:0;
+            border:1em solid #f5f5f5;
+            border-color:transparent #f5f5f5 transparent transparent; 
+        }
+
+        .comment p{
+            /* font-family:'Open Sans'; */
+            text-shadow:1px 1px 2px #fff;
+        }
+
+        .comment strong{font-weight:700;}
+        .comment .author{font-weight:300;font-size:.8em;margin-bottom: 10px;}
+
+        .comment img{
+            float:left;
+            max-width:40px;
+            border-radius:40px;
+            /* box-shadow:
+                0 0 0 1px rgba(0,0,0,.2),
+                0 0 0 7px rgba(200,200,200,1),
+                0 0 0 9px rgba(175,175,175,1),
+                0 0 20px rgba(0,0,0,.7); */
+            margin:3px 0 0 0;
+            
+        }
+
+        .guest {
+            width: 90%;
+            height: 45px;
+            margin-left: 15px;
+            margin-top: 1px;
+            border-style: none;
+            background-color: rgba(0, 0, 0, 0);
+            font-size:15px;
+            outline:0;
+            border-bottom: 1px solid lightgray;
+            border-radius: 0;
+            -webkit-appearance: none;
+            text-align-last: center;
+            color: #636c72;
+        }
+
+        .booking-item {
+            width: 90%;
+            margin-left: 15px;
+            margin-top: 10px;
+            padding-bottom: 15px;
+            border-style: none;
+            background-color: rgba(0, 0, 0, 0);
+            font-size:15px;
+            outline:0;
+            border-bottom: 1px solid lightgray;
+            border-radius: 0;
+            -webkit-appearance: none;
+            text-align-last: center;
+            color: #636c72;
+        }
+
+            /* html { box-sizing: border-box; }
+            html *,
+            html *:before,
+            html *:after { box-sizing: inherit; } */
+
+
+            .icon {
+              position: relative;
+              display: inline-block;
+              width: 12em;
+              height: 10em;
+              font-size: 1em; /* control icon size here */
+            }
+
+            .cloud {
+              position: absolute;
+              z-index: 1;
+              top: 50%;
+              left: 50%;
+              width: 3.6875em;
+              height: 3.6875em;
+              margin: -1.84375em;
+              background: white;
+              border-radius: 50%;
+              box-shadow:
+                -2.1875em 0.6875em 0 -0.6875em white,
+                2.0625em 0.9375em 0 -0.9375em white,
+                0 0 0 0.375em #cecece,
+                -2.1875em 0.6875em 0 -0.3125em #cecece,
+                2.0625em 0.9375em 0 -0.5625em #cecece;
+            }
+            .cloud:after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: -0.5em;
+              display: block;
+              width: 4.5625em;
+              height: 1em;
+              background: white;
+              box-shadow: 0 0.4375em 0 -0.0625em white;
+            }
+            .cloud:nth-child(2) {
+              z-index: 0;
+              background: #cecece;
+              box-shadow:
+                -2.1875em 0.6875em 0 -0.6875em #cecece,
+                2.0625em 0.9375em 0 -0.9375em #cecece,
+                0 0 0 0.375em #cecece,
+                -2.1875em 0.6875em 0 -0.3125em #cecece,
+                2.0625em 0.9375em 0 -0.5625em #cecece;
+              opacity: 0.3;
+              transform: scale(0.5) translate(6em, -3em);
+              animation: cloud 4s linear infinite;
+            }
+            .cloud:nth-child(2):after { background: #cecece; }
+
+            .sun {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 2.5em;
+              height: 2.5em;
+              margin: -1.25em;
+              /* background: currentColor; */
+              border-radius: 50%;
+              box-shadow: 0 0 0 0.375em #cecece;
+              animation: spin 12s infinite linear;
+            }
+            .rays {
+              position: absolute;
+              top: -2em;
+              left: 50%;
+              display: block;
+              width: 0.375em;
+              height: 1.125em;
+              margin-left: -0.1875em;
+              background: #cecece;
+              border-radius: 0.25em;
+              box-shadow: 0 5.375em #cecece;
+            }
+            .rays:before,
+            .rays:after {
+              content: '';
+              position: absolute;
+              top: 0em;
+              left: 0em;
+              display: block;
+              width: 0.375em;
+              height: 1.125em;
+              transform: rotate(60deg);
+              transform-origin: 50% 3.25em;
+              background: #cecece;
+              border-radius: 0.25em;
+              box-shadow: 0 5.375em #cecece;
+            }
+            .rays:before {
+              transform: rotate(120deg);
+            }
+            .cloud + .sun {
+              margin: -2em 1em;
+            }
+
+            .rain,
+            .lightning,
+            .snow {
+              position: absolute;
+              z-index: 2;
+              top: 50%;
+              left: 50%;
+              width: 3.75em;
+              height: 3.75em;
+              margin: 0.375em 0 0 -2em;
+              /* background: currentColor; */
+            }
+
+            .rain:after {
+              content: '';
+              position: absolute;
+              z-index: 2;
+              top: 50%;
+              left: 50%;
+              width: 1.125em;
+              height: 1.125em;
+              margin: -1em 0 0 -0.25em;
+              background: #0cf;
+              border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
+              box-shadow:
+                0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+                -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+                -1.375em -0.125em 0 rgba(255,255,255,0.2);
+              transform: rotate(-28deg);
+              animation: rain 3s linear infinite;
+            }
+
+            .bolt {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              margin: -0.25em 0 0 -0.125em;
+              color: #cecece;
+              opacity: 0.3;
+              animation: lightning 2s linear infinite;
+            }
+            .bolt:nth-child(2) {
+              width: 0.5em;
+              height: 0.25em;
+              margin: -1.75em 0 0 -1.875em;
+              transform: translate(2.5em, 2.25em);
+              opacity: 0.2;
+              animation: lightning 1.5s linear infinite;
+            }
+            .bolt:before,
+            .bolt:after {
+              content: '';
+              position: absolute;
+              z-index: 2;
+              top: 50%;
+              left: 50%;
+              margin: -1.625em 0 0 -1.0125em;
+              border-top: 1.25em solid transparent;
+              border-right: 0.75em solid;
+              border-bottom: 0.75em solid;
+              border-left: 0.5em solid transparent;
+              transform: skewX(-10deg);
+            }
+            .bolt:after {
+              margin: -0.25em 0 0 -0.25em;
+              border-top: 0.75em solid;
+              border-right: 0.5em solid transparent;
+              border-bottom: 1.25em solid transparent;
+              border-left: 0.75em solid;
+              transform: skewX(-10deg);
+            }
+            .bolt:nth-child(2):before {
+              margin: -0.75em 0 0 -0.5em;
+              border-top: 0.625em solid transparent;
+              border-right: 0.375em solid;
+              border-bottom: 0.375em solid;
+              border-left: 0.25em solid transparent;
+            }
+            .bolt:nth-child(2):after {
+              margin: -0.125em 0 0 -0.125em;
+              border-top: 0.375em solid;
+              border-right: 0.25em solid transparent;
+              border-bottom: 0.625em solid transparent;
+              border-left: 0.375em solid;
+            }
+
+            .flake:before,
+            .flake:after {
+              content: '\2744';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              margin: -1.025em 0 0 -1.0125em;
+              color: #cecece;
+              list-height: 1em;
+              opacity: 0.2;
+              animation: spin 8s linear infinite reverse;
+            }
+            .flake:after {
+              margin: 0.125em 0 0 -1em;
+              font-size: 1.5em;
+              opacity: 0.4;
+              animation: spin 14s linear infinite;
+            }
+            .flake:nth-child(2):before {
+              margin: -0.5em 0 0 0.25em;
+              font-size: 1.25em;
+              opacity: 0.2;
+              animation: spin 10s linear infinite;
+            }
+            .flake:nth-child(2):after {
+              margin: 0.375em 0 0 0.125em;
+              font-size: 2em;
+              opacity: 0.4;
+              animation: spin 16s linear infinite reverse;
+            }
+
+
+            /* Animations */ 
+
+            @keyframes spin {
+              100% { transform: rotate(360deg); }
+            }
+
+            @keyframes cloud {
+              0% { opacity: 0; }
+              50% { opacity: 0.3; }
+              100% {
+                opacity: 0;
+                transform: scale(0.5) translate(-200%, -3em);
+              }
+            }
+
+            @keyframes rain {
+              0% {
+                background: #0cf;
+                box-shadow:
+                  0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+                  -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+                  -1.375em -0.125em 0 #0cf;
+              }
+              25% {
+                box-shadow:
+                  0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+                  -0.875em 1.125em 0 -0.125em #0cf,
+                  -1.375em -0.125em 0 rgba(255,255,255,0.2);
+              }
+              50% {
+                background: rgba(255,255,255,0.3);
+                box-shadow:
+                  0.625em 0.875em 0 -0.125em #0cf,
+                  -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+                  -1.375em -0.125em 0 rgba(255,255,255,0.2);
+              }
+              100% {
+                box-shadow:
+                  0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+                  -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+                  -1.375em -0.125em 0 #0cf;
+              }
+            }
+
+            @keyframes lightning {
+              45% {
+                color: #cecece;
+                background: #cecece;
+                opacity: 0.2;
+              }
+              50% {
+                color: #0cf;
+                background: #0cf;
+                opacity: 1;
+              }
+              55% {
+                color: #cecece;
+                background: #cecece;
+                opacity: 0.2;
+              }
+            }
+
+            .temp-style {
+                text-align:center;
+                color:gray;
+                font-size: 22px;
+            }
+
+            /* home button */
+
+            .button-home{
+            color:#fff;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size:20px;
+            margin: 20px 0 0 20px;
+            border-radius: 2%;
+            }
+
+
+            .button-home {
+                position: absolute;
+                left: 0;
+                background-color: #f7f4f480;
+                border: none;
+                padding: 20px;
+                width: 120px;
+                height: 50px;
+                line-height: 10px;
+                text-align: center;
+                -webkit-transition-duration: 0.4s;
+                transition-duration: 0.4s;
+                text-decoration: none;
+                overflow: hidden;
+                z-index: 1001;
+            }
+
+            .button-home:hover{
+            background:#ff5a5f;
+            /* box-shadow:0px 2px 10px 5px #fff; */
+            color:#fff;
+            }
+
+            .button-home:after {
+                content: "";
+                background: #ff9fa2;
+                display: block;
+                position: absolute;
+                padding-top: 300%;
+                padding-left: 350%;
+                border-color: #FFFFFF;
+                margin-left: -20px !important;
+                margin-top: -120%;
+                opacity: 0;
+                transition: all 0.8s
+            }
+
+            .button-home:active:after {
+                padding: 0;
+                margin: 0;
+                opacity: 1;
+                transition: 0s
+            }
+
+            .button-home:focus {outline:0;}
+
+
+            /* comment */
+
+            .pop-window {
+            width: 500px;
+            z-index: 2999;
+            background: #fff;
+            margin: 0 auto;
+            border: 2px solid #cdcdcd;
+            padding: 20px;
+            position: fixed;
+            top: 30%;
+            left: 33%;
+            }
+
+            .container {
+            margin: 0 auto;
+            }
+
+            .overlay {
+            z-index: 1999;
+            background: rgba(0, 0, 0, 0.7);
+            height: 100%;
+            width: 100%;
+            top: 0px;
+            left: 0px;
+            position: fixed;
+            }
+
+            .close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: #000;
+            cursor: pointer;
+            }
+
+
+
+            /* Input Styles */
+
+            .form{
+                width: 100%;
+                padding: 15px;
+                background:#f8f8f8;
+                border:1px solid rgba(0, 0, 0, 0.075);
+                margin-bottom:25px;
+                color:#727272 !important;
+                font-size:13px;
+                -webkit-transition: all 0.4s;
+                -moz-transition: all 0.4s;
+                transition: all 0.4s;
+            }
+
+            .form:hover{
+                border:1px solid #8BC3A3;
+            }
+
+            .form:focus{
+                color: white;
+                outline: none;
+                border:1px solid #8BC3A3;
+            }
+
+            .textarea{
+                height: 200px;
+                max-height: 180px;
+                max-width: 93%;
+            }
+            
+            /* Generic Button Styles */
+
+            .button{
+                padding:8px 12px;
+                background:#0A5175;
+                display: block;
+                width:120px;
+                margin:10px 0 0px 0;
+                border-radius:3px;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+                text-align:center;
+                font-size:0.8em;
+                box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+                -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+                -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+            }
+
+            .button:hover{
+                background:#8BC3A3;
+                color:white;
+            }
+
+            /* Send Button Styles */
+
+            .form-btn{
+                width:180px;
+                display: block;
+                height: auto;
+                padding:15px;
+                color:#fff;
+                background:#8BC3A3;
+                border:none;
+                border-radius:3px;
+                outline: none;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+                margin:auto;
+                box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+                -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+                -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+            }
+
+            .form-btn:hover{
+                background:#111;
+                color: white;
+                border:none;
+            }
+
+            .form-btn:active{
+                opacity: 0.9;
+            }
+            center{
+            margin-top:330px;
+            }
+            input {
+                position: relative;
+                z-index: 9999;
+            }
+
+            .star-ratings-sprite {
+                background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+                font-size: 0;
+                height: 21px;
+                line-height: 0;
+                overflow: hidden;
+                text-indent: -999em;
+                width: 110px;
+                float: right;
+                margin-right: 100px;
+            }
+
+            .star-ratings-sprite-rating {
+                background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+                background-position: 0 100%;
+                float: left;
+                height: 21px;
+                display: block;
+            }
+
+            .star {
+                margin-top: 4px;
+            }
+
+    </style>
+
+</head>
+
+<body>
+
+    <title>BeerAnA</title>
+    <script src="https://use.fontawesome.com/0e0489211b.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Poppins:200,300,400,500,600" rel="stylesheet">
+
+    <div class="add-button">
+        <div class="sub-button tl" onclick="addToFavorite();"></div>
+        <div class="sub-button tr" onclick="addToComparison();"></div>
+        <a href="{% url 'compare_table' %}"><div class="sub-button bl"></div></a>
+        <!-- <div class="sub-button br" onclick=""></div> -->
+        <button class="sub-button br" style="border: none; outline:0;" onclick="addComment()"></button>
+    </div>
+
+    <div class="pop-window" style="display: none;">
+        <div class="inner">
+            <div class="contact-form">
+                <div class="col-xs-6 wow animated slideInRight" data-wow-delay=".5s">
+                    <!-- Message -->
+                    <textarea id="message_to_host" class="form textarea"  placeholder="Talk to owner..."></textarea>
+                </div><!-- End Right Inputs -->
+                <!-- Bottom Submit -->
+                <div class="relative fullwidth col-xs-12">
+                    <!-- Send Button -->
+                    <button onclick="sendToHost();" class="form-btn semibold">Send</button> 
+                </div><!-- End Bottom Submit -->
+                <div class="clear"></div>            
+            </div><!-- End Contact Form Area -->
+        </div>
+    <!-- <div class="close">x</div> -->
+    </div>
+
+    <div style="margin-bottom:100px;">
+
+        <div>
+
+            <button class="button-home" onclick="location.href={% url 'index' %}">Home</button>
+
+            <div class="mySlides fade">
+              <!-- <div class="numbertext ">1 / 3</div> -->
+              <img src="{{ property.image }}">
+              <!-- <div class="text">Caption Text</div> -->
+            </div>
+            
+            <div class="mySlides fade">
+              <!-- <div class="numbertext">2 / 3</div> -->
+              <img src="https://i.ytimg.com/vi/CuFiEPYF3xY/maxresdefault.jpg">
+              <!-- <div class="text">Caption Two</div> -->
+            </div>
+            
+            <div class="mySlides fade">
+              <!-- <div class="numbertext">3 / 3</div> -->
+              <img src="https://d12dkjq56sjcos.cloudfront.net/pub/media/wysiwyg/route-images/View-Of-Bondi-Beach-Slider-Big-Bus-Tours.jpg">
+              <!-- <div class="text">Caption Three</div> -->
+            </div>
+            
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            
+        </div>
+
+        <!-- <div style="text-align:center; margin-top: -20px; z-index: 100;">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+        </div> -->
+
+
+
+        <div class="content">
+            <div>
+                <div class="overview">
+                    <a href="#overview" class="general-link"><span class="overview-main">Overview</span></a>
+                    <span class="overview-separator"> · </span>
+                    <a href="#comments" class="general-link"><span class="overview-items">Comments</span></a>
+                    <span class="overview-separator"> · </span>
+                    <a href="#booking" class="general-link"><span class="overview-items">Booking</span></a>
+                    <span class="overview-separator"> · </span>
+                    <a href="#location" class="general-link"><span class="overview-items">Location</span></a>
+                </div>
+            </div>
+
+            <div id="general" class="pattern-general-div">
+                <p class="pattern-general-head-font"></p>
+                <div class="property-div">
+                    <p class="property-name">{{ property.name }}</p><br>
+                    <a class="property-subname"><span>{{ property.address }}</span></a> <span> · </span>
+                    <a class="property-subname"><span>{{ comment_number }} Reviews</span></a>
+                </div>
+                <div class="host-div">
+                    <img src="/app/media/{{ property.owner.avatar }}" class="host-avatar">
+                    <p class="host-name">{{ property.owner.username }}</p>
+                </div>
+
+                <div class="ody" style="float:right;margin-right: 150px;">
+                    <div class="icon sun-shower" style="display:none">
+                        <div class="cloud"></div>
+                        <div class="sun">
+                            <div class="rays"></div>
+                        </div>
+                        <div class="rain"></div>
+                        <div ><span class="temp"></span>&nbsp;&#8451;</div>
+                    </div>
+              
+                    <div class="icon thunder-storm" style="display:none">
+                        <div class="cloud"></div>
+                        <div class="lightning">
+                            <div class="bolt"></div>
+                            <div class="bolt"></div>
+                        </div>
+                        <div class="temp-style"><span class="temp"></span>&nbsp;&#8451;</div>
+                    </div>
+              
+                    <div class="icon cloudy" id="w-cloud" style="display:none">
+                        <div class="cloud"></div>
+                        <div class="cloud"></div>
+                        <div class="temp-style"><span class="temp"></span>&nbsp;&#8451;</div>
+                    </div>
+              
+                    <div class="icon flurries" style="display:none">
+                        <div class="cloud"></div>
+                        <div class="snow">
+                            <div class="flake"></div>
+                            <div class="flake"></div>
+                        </div>
+                        <div class="temp-style"><span class="temp"></span>&nbsp;&#8451;</div>
+                    </div>
+              
+                    <div class="icon sunny" id="w-clear" style="display:none">
+                        <div class="sun">
+                            <div class="rays"></div>
+                        </div>
+                        <div class="temp-style"><span class="temp"></span>&nbsp;&#8451;</div>
+                    </div>
+            
+                    <div class="icon rainy" id="w-rain" style="display:none">
+                        <div class="cloud"></div>
+                        <div class="rain"></div>
+                        <div class="temp-style"><span class="temp"></span>&nbsp;&#8451;</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="facility" class="pattern-general-div">
+                <p class="pattern-general-head-font"></p>
+                <div class="facility-icons"><i class="fa fa-2x fa-home" aria-hidden="true"></i>
+                    <p class="facility-names">Entire home/apt</p>
+                </div>
+                <div class="facility-icons"><i class="fa fa-2x fa-users" aria-hidden="true"></i>
+                    <p class="facility-names">{{ property.maximum_tenant }} guests</p>
+                </div>
+                <div class="facility-icons"><i class="fa fa-2x fa-bath" aria-hidden="true"></i>
+                    <p class="facility-names">{{ property.room_number }} bedroom</p>
+                </div>
+                <div class="facility-icons"><i class="fa fa-2x fa-bed" aria-hidden="true"></i>
+                    <p class="facility-names">{{ property.maximum_bed_number }} bed</p>
+                </div>
+            </div>
+
+            <div id="decription" class="pattern-general-div">
+                <p class="pattern-general-head-font"></p><a name="overview"></a><br>
+                <div>
+                    <div>
+                        <div style="margin-top: -20px;">
+                            <p><span style="font-weight: 400; margin: 0px;">Property Description</span></p>
+                            <p><span>{{ property.policy }}</span></p>
+                            <p><span>{{ property.description }}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <a class="general-link">Contact host</a> -->
+            </div>
+
+            <div id="space" class="pattern-general-div">
+                <p class="pattern-general-head-font">The space</p>
+                <div class="space-block">
+                    <p class="space-font-1">Accomodates:&nbsp;<span class="space-font-2">{{ property.maximum_tenant }}</span></p>
+                    <p class="space-font-1">Bathrooms:&nbsp;<span class="space-font-2">{{ property.bathroom_number }}</span></p>
+                    <p class="space-font-1">Bedrooms:&nbsp;<span class="space-font-2">{{ property.room_number }}</span></p>
+                    <p class="space-font-1">Beds:&nbsp;<span class="space-font-2">{{ property.maximum_bed_number }}</span></p>
+                </div>
+                <div class="space-block">
+                    <p class="space-font-1">Check In:&nbsp;<span class="space-font-2">3PM - 10PM</span></p>
+                    <p class="space-font-1">Check Out:&nbsp;<span class="space-font-2">12PM (noon)</span></p>
+                    <p class="space-font-1">Property type:&nbsp;<span class="space-font-2">
+                        {% if property.property_type == 'A' %}
+                            Apartment
+                        {% elif property.property_type == 'H' %}
+                            House
+                        {% else %}
+                            Unit
+                        {% endif %}
+                    </span></p>
+                    <p class="space-font-1">Room type:&nbsp;<span class="space-font-2">
+                        {% if property.rent_type == 'S' %}
+                            Separate room
+                        {% else %}
+                            Entire home/apt
+                        {% endif %}
+                    </span></p>
+                </div><br>
+            </div>
+
+            <div id="amenity" class="pattern-general-div">
+                <p class="pattern-general-head-font">Amenities</p>
+                <div id="amenities">
+                    <div>
+                        {% for f in amenties %}
+                        <div class="amenity-font-1"><span>{{ f }}</span></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div id="price" class="pattern-general-div">
+                <p class="pattern-general-head-font">Prices</p>
+                <div>
+                    <div class="price-font-1"><span>Per Night
+                        </span><span class="price-font-2">${{ property.daily_price }}</span></div>
+                    <div class="price-font-1"><span>Per Week
+                        </span><span class="price-font-2">${{ property.weekly_price }}</span></div>
+                    <div class="price-font-1"><span>Clean Fee
+                        </span><span class="price-font-2">${{ property.clean_fee }}</span></div>
+                </div>
+            </div>
+
+            <!-- <div id="rule" class="pattern-general-div">
+                <p class="pattern-general-head-font">House rules</p><a name="houseRules"></a>
+                <div>
+                    <p><span>No smoking</span></p>
+                    <p><span>Not suitable for pets</span></p>
+                    <p><span>No parties or events</span></p>
+                    <p><span>Check in time is 3PM - 10PM</span></p>
+                </div>
+            </div> -->
+
+            <a name="booking"></a>
+            <p><span style="font-weight: 400;">Booking</span></p>
+            <div class="space-block" style="float: left;">
+                <div data-range="true" class="datepicker-here" id="booking-date"></div>
+            </div>
+            <div style="float:left;">
+                <div class="space-block" style="border: 1px solid #e4e4e4 !important;height: 275px;border-radius: 3px;">
+                    <p class="space-font-1">
+                        <div style="width: 100%;">
+                            <select class="guest" id="guest_num">
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guest</option>
+                                <option value="3">3 Guest</option>
+                                <option value="4">4 Guest</option>
+                                <option value="5">5 Guest</option>
+                            </select>
+                        </div>
+                    </p>
+                    <p class="booking-item">Days:&nbsp;<span id="days_number">0</span> x ${{ property.daily_price }}</p>
+                    <p class="booking-item">Clean fee:&nbsp;${{ property.clean_fee }}</p>
+                    <p class="booking-item">Total amount:&nbsp;$<span id="total_amount">0</span></p>
+                    <p class="booking-item" style="border:none; cursor: pointer;">
+                        <a class="" style="display:block; width:100%; background:#ff5a5f; 
+                        border-radius: 3px;color: white;line-height: 40px;"
+                        onclick="submitOrder();">Book</a>
+                    </p>
+                </div>
+            </div>
+
+            <div id="location" class="pattern-general-div" style="clear:both;">
+                <p><span style="font-weight: 400; margin: 0px;">Location</span></p>
+                <p><span>{{ property.address }}</span></p><a name="location"></a>
+                <div id="map" class=""></div>
+            </div>
+
+            <a name="comments"></a>
+            <div id="comments" class="pattern-general-div" style="margin-top: 40px;">
+                <p class="pattern-general-head-font">Comments</p><a name="houseRules"></a>
+                <div style="margin-top: -20px;">
+                    {% for comment in comments %}
+                    <div class="comment">
+                        <img src="/app/{{ comment.tenantID.avatar.url }}">
+                        <div class="comment-content">
+                            <div class="author">
+                                <strong>{{ comment.tenantID.username }}</strong>
+                                &nbsp;&nbsp;{{ comment.time_stamp }}
+                                <div class="star-ratings-sprite"><span style="width:{{ comment.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                            </div>
+                        <span style="width: 90%;">
+                            {{ comment.content }}
+                        </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    
+    </div>
+
+
+
+    <!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <script>
+    $(document).ready(function () {
+        //Google Maps JS
+        //Set Map
+        function initialize() {
+            var myLatlng = new google.maps.LatLng({{ property.latitude }}, {{ property.longitude }});
+            var imagePath = "/app/media/static/assets/pin.png";
+            var mapOptions = {
+                zoom: 15,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            var infowindow = new google.maps.InfoWindow({
+                content: '{{ property.address }}',
+                maxWidth: 500
+            });
+
+            //Add Marker
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                icon: imagePath,
+                title: ''
+            });
+
+            google.maps.event.addListener(marker, 'click', function (event) {
+                infowindow.open(map, marker);
+            });
+
+            //Resize Function
+            google.maps.event.addDomListener(window, "resize", function () {
+                var center = map.getCenter();
+                google.maps.event.trigger(map, "resize");
+                map.setCenter(center);
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        $.get("https://api.openweathermap.org/data/2.5/weather?lat=-33&lon=150&units=metric&appid=c9d49310f8023ee2617a7634de23c2aa",
+        function(data, status) {
+            console.log(data.weather[0].main);
+            var c_weather = data.weather[0].main;
+            var c_temp = data.main.temp;
+            if (c_weather == 'Clouds') {
+                console.log(1);
+                $("#w-cloud").show();
+                $("#w-cloud .temp").text(c_temp);
+            } else if(c_weather == 'Rain') {
+                console.log(3);
+                $("#w-rain").show();                
+                $("#w-rain .temp").text(c_temp);
+            } else {//(c_weather == 'Clear') {
+                console.log(2);
+                $("#w-clear").show();
+                $("#w-clear .temp").text(c_temp);
+            } 
+        });
+    });
+    </script>
+
+    <script>
+        var retriveDate;
+        var cleanFee = {{ property.clean_fee }};
+        var daylyPrice = {{ property.daily_price }};
+        var currentDdd;
+        // Initialization
+        // var eventDates = $.parseJSON({{ occupied_dates|safe }});
+        var eventDates = {{ occupied_dates|safe }};
+        $('#booking-date').datepicker({
+            clearButton: true,
+            language: 'en',
+            minDate: new Date(),
+            onRenderCell: function (date, cellType) {
+                // var currentDate = ;
+                // var currentMonth = ;
+                if (cellType == 'day') {
+                    if (eventDates[date.getMonth()+1] && eventDates[date.getMonth()+1].indexOf(date.getDate()) != -1){
+                        // console.log(date);
+                        // console.log(currentMonth, currentDate);
+                        return {
+                            classes: 'amenity-font-2 -disabled-'
+                        }
+                    }
+                }
+            },
+            onSelect: function (formattedDate, date) {
+                if (date.length == 2) {
+                    retriveDate = date;
+                    // console.log(retriveDate);
+                    var timeGap = (retriveDate[1].getTime()-retriveDate[0].getTime())/3600/24/1000;
+                    timeGap = Math.floor(timeGap);
+                    // console.log(timeGap);
+                    $('#days_number').text(timeGap);
+                    $('#total_amount').text(timeGap*daylyPrice+cleanFee);
+                }
+            }
+        })
+    </script>
+
+    <script>
+        function addToComparison() {
+            {% if user.is_authenticated %}            
+            $.get("{% url 'add_to_cart' property.id %}",function(data, status){
+                console.log(data);
+                alert("add to cart");
+            });
+            {% else %}
+            alert("please login");
+            {% endif %}
+        }
+        function addToFavorite() {
+            {% if user.is_authenticated %}
+            $.get("{% url 'add_remove_favorite' property.id %}",function(data, status){
+                console.log(data);
+                if(data == '1')
+                    alert("add to favorite");
+                else if(data == '2')
+                    alert("remove from favourite");
+                else
+                    alert("something wrong");
+            });
+            {% else %}
+            alert("please login");
+            {% endif %}
+        }
+
+        function submitOrder() {
+            {% if user.is_authenticated %}
+            if(retriveDate == undefined || retriveDate.length != 2) {
+                alert("please select date range");
+                return;
+            }
+            var startDate = retriveDate[0].toLocaleDateString("en-US");
+            var endDate = retriveDate[1].toLocaleDateString("en-US");
+            var guestNumber = $('#guest_num').val();
+            $.post("{% url 'post_booking' %}", 
+            {
+                property_id: '{{ property.id }}',
+                start_date: startDate,
+                end_date: endDate,
+                guest_number: guestNumber
+            },
+            function(data, status) {
+                if(data == '1') {
+                    alert("booking succeed");
+                } else {
+                    alert("dates occupied");
+                }
+            });
+            {% else %}
+            alert("please login");
+            {% endif %}
+        }
+
+        function sendToHost() {
+            {% if user.is_authenticated %}
+            var msg = $('#message_to_host').val();
+            if(msg.length == 0)
+                return;
+            $.post("{% url 'send_to' %}", 
+            {
+                receiver:"{{ property.owner.id }}",
+                msg:msg
+            },
+            function(data, status) {
+                if(data == '1') {
+                    // alert("send succeed");
+                    $popup.slideUp();
+                    $overlay.delay(100).fadeOut();
+                }
+            });
+            {% endif %}
+        }
+    </script>
+
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+    
+        function plusSlides(n) {
+        showSlides(slideIndex += n);
+        clearInterval(timeoutHandle);
+        }
+    
+        function currentSlide(n) {
+        showSlides(slideIndex = n);
+        clearInterval(timeoutHandle);
+        }
+    
+        function autoSlides() {
+        showSlides(slideIndex += 1);
+        clearInterval(timeoutHandle);
+        }
+    
+        function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            // document.write(i);
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        timeoutHandle = setInterval(autoSlides, 4000);
+        }
+    
+    </script>
+
+<script>
+        var $overlay = $('<div class="overlay"></div>');
+        var $popup = $('.pop-window');
+      
+        // $('<div class="close">x</div>').appendTo($popup);
+        // $popup.hide();
+      
+        function addComment() {
+        {% if user.is_authenticated %}
+            $overlay.fadeIn(200).appendTo('body');
+            $popup.delay(200).slideDown();
+        {% else %}
+            // console.log("not log in");
+            alert("please login");
+        {% endif %}
+        };
+      
+        $overlay.click(function () {
+          $overlay.delay(200).fadeOut();
+          $popup.slideUp();
+        });
+      
+        $('.close').click(function () {
+          $popup.slideUp();
+          $overlay.delay(100).fadeOut();
+        });
+      
+      </script>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<div class="col-md-3 space-sm-4">
+    <div class="sidenav">
+        <ul class="sidenav-list">
+            <li>
+                <a 
+                {% if GENDER_CHOICES %}
+                href="" aria-selected="true"
+                {% else %}
+                href="{% url 'user_page' %}" aria-selected="false"
+                {% endif %}
+                class="sidenav-item">Edit Profile</a>
+            </li>
+            <li>
+                <a
+                {% if user_photo %}
+                href="" aria-selected="true"
+                {% else %}
+                href="{% url 'user_photo' %}" aria-selected="false"
+                {% endif %}
+                class="sidenav-item">Photos</a>
+            </li>
+            <li>
+                <a
+                {% if favourites %}
+                href="" aria-selected="true"
+                {% else %}
+                href="{% url 'favorites' %}" aria-selected="false"
+                {% endif %}
+                class="sidenav-item">My Favorite</a>
+            </li>
+            <li>
+                <a
+                {% if owned_properties %}
+                href="" aria-selected="true"
+                {% else %}
+                href="{% url 'user_properties' %}" aria-selected="false"
+                {% endif %}
+                 class="sidenav-item">Properties</a>
+            </li>
+            <li>
+                <a
+                {% if messages %}
+                href="" aria-selected="true"
+                {% else %}
+                href="{% url 'user_message' %}" aria-selected="false"
+                {% endif %}
+                class="sidenav-item">Message</a>
+            </li>
+            <li>
+                <a
+                {% if booking %}
+                href="" aria-selected="true"
+                {% else %}
+                href="{% url 'user_booking_list' %}" aria-selected="false"
+                {% endif %}
+                class="sidenav-item">My Trip</a>
+            </li>
+            <li>
+                <a
+                {% if requests %}
+                href="" aria-selected="true"
+                {% else %}
+                href="{% url 'user_requests' %}" aria-selected="false"
+                {% endif %}
+                class="sidenav-item">My requests</a>
+            </li>
+        </ul>
+    </div>
+</div>

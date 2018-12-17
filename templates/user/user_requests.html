@@ -1,0 +1,111 @@
+{% extends 'user/base.html' %}
+
+{% block page_style %}
+<link href="https://a0.muscache.com/airbnb/static/packages/dls/common_o2.1_cereal-5b1258a20d28a7001c7107711f62b5f1.css"
+    media="all" rel="stylesheet" type="text/css" />
+<link href="https://a0.muscache.com/airbnb/static/packages/common-7d0f582f30cdc661f9c474f22e4da235.css" media="all" rel="stylesheet"
+    type="text/css" />
+
+<style>
+    .block-with-text {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+    }
+
+
+    .btn_ {
+	position: relative;
+	display: block;
+    border: none;
+	/* margin: 30px auto; */
+	/* padding: 0; */
+	/* text-align: center !important; */
+	/* overflow: hidden; */
+	padding: 0px;
+	box-sizing: border-box;
+	/* border-width: 0; */
+	outline: none;
+	border-radius: 2px;
+	/* box-shadow: 0 1px 4px rgba(0, 0, 0, .6); */
+	
+	background-color: #e9e5e5;
+	color: #ff5a5f !important;
+	
+	transition: background-color .3s;
+	}
+
+	.btn_:hover, .btn_:focus {
+	color: white !important;
+	background-color: #ff5a5f;
+	border: none !important;
+	}
+</style>
+
+
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="page-container-responsive space-top-4 space-4">
+    <div class="row">
+        {% include 'user/user_sidebar.html' %}
+        <div class="col-md-9">
+            <div id="dashboard-content">
+                {% for entry in requests %}
+                <div class="panel space-4" id="request_{{ entry.id }}">
+                    <div class="panel-header" style="min-height: 42px;">
+                        <div style="float: left;"><h1 class="edit-profile-section-heading">City: {{ entry.prefer_city }}</h1></div>
+                        <div style="float: right;"><a class="btn_" style="width: 60px; text-align: center; text-decoration: none;" onclick="delete_request('{{ entry.id }}');">Delete</a></div>
+                    </div>
+                    <div class="panel-body photos-section">
+                        <div class="row" style="height: 30px;">
+                            <!-- <div class="col-lg-4 text-center">
+                                <div class="profile_pic_container picture-main space-sm-2 space-md-2">
+                                    <button class="picture-tile-delete overlay-btn" style="display:none;">
+                                        <i class="icon icon-trash"></i>
+                                    </button>
+                                </div>
+                            </div> -->
+                            <div class="col-lg-8">
+                                <div class="block-with-text" style="float: left;">
+                                    <p style="margin-bottom: 0;">
+                                            Move Day: {{ entry.move_day }}
+                                    </p>
+                                </div>
+                                <div class="col-xs-12 col-md-6" style="float: right;">
+                                    <p class="lead">
+                                            Rent Budget: ${{ entry.budget }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a style="text-decoration: none" href="{% url 'request_register' %}">
+                <label class="btn btn-block btn-large"><span class="icon icon-add"></span></label>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function delete_request(id) {
+        $('#request_'+id).remove();
+        $.post("{% url 'delete_request' %}", 
+        {
+            rid: id
+        },function(data, status) {
+            if(data == '1') {
+                alert("send succeed!");
+            } else {
+                alert('send failed');
+            }
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,1172 @@
+{% extends "user/base.html" %}
+
+
+
+{% block page_style %}
+
+
+<meta charset="utf-8">
+<title>Property Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600' rel='stylesheet' type='text/css'>
+
+<style>
+	html {
+		font-family: sans-serif;
+		-ms-text-size-adjust: 100%;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		margin: 0;
+	}
+
+	a {
+		background: transparent;
+	}
+
+	button,
+	input,
+	select,
+	textarea {
+		font-family: inherit;
+		font-size: 100%;
+		margin: 0;
+	}
+
+	button,
+	input {
+		line-height: normal;
+	}
+
+	button,
+	select {
+		text-transform: none;
+	}
+
+	button,
+	html input[type="button"],
+	input[type="reset"],
+	input[type="submit"] {
+		-webkit-appearance: button;
+		cursor: pointer;
+	}
+	input[type="cancel"] {
+		-webkit-appearance: button;
+		cursor: pointer;
+	}
+	input[type="checkbox"],
+	input[type="radio"] {
+		box-sizing: border-box;
+		padding: 0;
+		background-color: white !important;
+	}
+
+	textarea {
+		overflow: auto;
+		vertical-align: top;
+	}
+
+	*,
+	*:before,
+	*:after {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	html {
+		font-size: 62.5%;
+		min-height: 100%;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+
+	body {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size: 14px;
+		line-height: 1.428571429;
+		color: #333333;
+		background-color: #ffffff;
+		-webkit-font-smoothing: antialiased;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+	}
+
+	input,
+	button,
+	select,
+	textarea {
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+	}
+
+	a {
+		color: #ff5a5f;
+		text-decoration: none;
+	}
+
+	p {
+		margin: 0 0 10px;
+	}
+
+	.container {
+		margin-right: auto;
+		margin-left: auto;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	.container:before,
+	.container:after {
+		content: " ";
+		/* 1 */
+		display: table;
+		/* 2 */
+	}
+
+	.container:after {
+		clear: both;
+	}
+
+	.row {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+
+	.row:before,
+	.row:after {
+		content: " ";
+		/* 1 */
+		display: table;
+		/* 2 */
+	}
+
+	.row:after {
+		clear: both;
+	}
+
+	.col-xs-1,
+	.col-sm-1,
+	.col-md-1,
+	.col-lg-1,
+	.col-xs-2,
+	.col-sm-2,
+	.col-md-2,
+	.col-lg-2,
+	.col-xs-3,
+	.col-sm-3,
+	.col-md-3,
+	.col-lg-3,
+	.col-xs-4,
+	.col-sm-4,
+	.col-md-4,
+	.col-lg-4,
+	.col-xs-5,
+	.col-sm-5,
+	.col-md-5,
+	.col-lg-5,
+	.col-xs-6,
+	.col-sm-6,
+	.col-md-6,
+	.col-lg-6,
+	.col-xs-7,
+	.col-sm-7,
+	.col-md-7,
+	.col-lg-7,
+	.col-xs-8,
+	.col-sm-8,
+	.col-md-8,
+	.col-lg-8,
+	.col-xs-9,
+	.col-sm-9,
+	.col-md-9,
+	.col-lg-9,
+	.col-xs-10,
+	.col-sm-10,
+	.col-md-10,
+	.col-lg-10,
+	.col-xs-11,
+	.col-sm-11,
+	.col-md-11,
+	.col-lg-11,
+	.col-xs-12,
+	.col-sm-12,
+	.col-md-12,
+	.col-lg-12 {
+		position: relative;
+		min-height: 1px;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	@media (min-width: 768px) {
+		.container {
+			width: 750px;
+		}
+	}
+
+	@media (min-width: 992px) {
+		.container {
+			width: 970px;
+		}
+
+		.col-md-1,
+		.col-md-2,
+		.col-md-3,
+		.col-md-4,
+		.col-md-5,
+		.col-md-6,
+		.col-md-7,
+		.col-md-8,
+		.col-md-9,
+		.col-md-10,
+		.col-md-11 {
+			float: left;
+		}
+
+		.col-md-9 {
+			width: 75%;
+		}
+
+		.col-md-6 {
+			width: 50%;
+		}
+
+		.col-md-3 {
+			width: 25%;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.container {
+			width: 1170px;
+		}
+
+		.col-lg-1,
+		.col-lg-2,
+		.col-lg-3,
+		.col-lg-4,
+		.col-lg-5,
+		.col-lg-6,
+		.col-lg-7,
+		.col-lg-8,
+		.col-lg-9,
+		.col-lg-10,
+		.col-lg-11 {
+			float: left;
+		}
+
+		.col-lg-12 {
+			width: 100%;
+		}
+
+		.col-lg-11 {
+			width: 91.66666666666666%;
+		}
+
+		.col-lg-10 {
+			width: 83.33333333333334%;
+		}
+
+		.col-lg-9 {
+			width: 75%;
+		}
+
+		.col-lg-8 {
+			width: 66.66666666666666%;
+		}
+
+		.col-lg-7 {
+			width: 58.333333333333336%;
+		}
+
+		.col-lg-6 {
+			width: 50%;
+		}
+
+		.col-lg-5 {
+			width: 41.66666666666667%;
+		}
+
+		.col-lg-4 {
+			width: 33.33333333333333%;
+		}
+
+		.col-lg-3 {
+			width: 25%;
+		}
+
+		.col-lg-2 {
+			width: 16.666666666666664%;
+		}
+
+		.col-lg-1 {
+			width: 8.333333333333332%;
+		}
+
+		.col-lg-pull-12 {
+			right: 100%;
+		}
+
+		.col-lg-pull-11 {
+			right: 91.66666666666666%;
+		}
+
+		.col-lg-pull-10 {
+			right: 83.33333333333334%;
+		}
+
+		.col-lg-pull-9 {
+			right: 75%;
+		}
+
+		.col-lg-pull-8 {
+			right: 66.66666666666666%;
+		}
+
+		.col-lg-pull-7 {
+			right: 58.333333333333336%;
+		}
+
+		.col-lg-pull-6 {
+			right: 50%;
+		}
+
+		.col-lg-pull-5 {
+			right: 41.66666666666667%;
+		}
+
+		.col-lg-pull-4 {
+			right: 33.33333333333333%;
+		}
+
+		.col-lg-pull-3 {
+			right: 25%;
+		}
+
+		.col-lg-pull-2 {
+			right: 16.666666666666664%;
+		}
+
+		.col-lg-pull-1 {
+			right: 8.333333333333332%;
+		}
+
+		.col-lg-pull-0 {
+			right: 0%;
+		}
+
+		.col-lg-push-12 {
+			left: 100%;
+		}
+
+		.col-lg-push-11 {
+			left: 91.66666666666666%;
+		}
+
+		.col-lg-push-10 {
+			left: 83.33333333333334%;
+		}
+
+		.col-lg-push-9 {
+			left: 75%;
+		}
+
+		.col-lg-push-8 {
+			left: 66.66666666666666%;
+		}
+
+		.col-lg-push-7 {
+			left: 58.333333333333336%;
+		}
+
+		.col-lg-push-6 {
+			left: 50%;
+		}
+
+		.col-lg-push-5 {
+			left: 41.66666666666667%;
+		}
+
+		.col-lg-push-4 {
+			left: 33.33333333333333%;
+		}
+
+		.col-lg-push-3 {
+			left: 25%;
+		}
+
+		.col-lg-push-2 {
+			left: 16.666666666666664%;
+		}
+
+		.col-lg-push-1 {
+			left: 8.333333333333332%;
+		}
+
+		.col-lg-push-0 {
+			left: 0%;
+		}
+
+		.col-lg-offset-12 {
+			margin-left: 100%;
+		}
+
+		.col-lg-offset-11 {
+			margin-left: 91.66666666666666%;
+		}
+
+		.col-lg-offset-10 {
+			margin-left: 83.33333333333334%;
+		}
+
+		.col-lg-offset-9 {
+			margin-left: 75%;
+		}
+
+		.col-lg-offset-8 {
+			margin-left: 66.66666666666666%;
+		}
+
+		.col-lg-offset-7 {
+			margin-left: 58.333333333333336%;
+		}
+
+		.col-lg-offset-6 {
+			margin-left: 50%;
+		}
+
+		.col-lg-offset-5 {
+			margin-left: 41.66666666666667%;
+		}
+
+		.col-lg-offset-4 {
+			margin-left: 33.33333333333333%;
+		}
+
+		.col-lg-offset-3 {
+			margin-left: 25%;
+		}
+
+		.col-lg-offset-2 {
+			margin-left: 16.666666666666664%;
+		}
+
+		.col-lg-offset-1 {
+			margin-left: 8.333333333333332%;
+		}
+
+		.col-lg-offset-0 {
+			margin-left: 0%;
+		}
+	}
+
+	label {
+		display: inline-block;
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+
+	input[type="radio"],
+	input[type="checkbox"] {
+		margin: 4px 0 0;
+		margin-top: 1px \9;
+		/* IE8-9 */
+		line-height: normal;
+	}
+
+	input[type="file"] {
+		display: block;
+	}
+
+	.fcorn-register {
+		font-family: "Source Sans Pro";
+		width: 800px;
+		margin: 0 auto;
+		padding: 10px 35px;
+		background: #fff;
+		border: 1px solid #eee;
+		letter-spacing: 1px;
+		box-shadow: 0 0 2px rgba(60, 60, 60, 0.1);
+	}
+
+	.fcorn-register p {
+		margin-bottom: 30px;
+	}
+
+	.fcorn-register p.register-info {
+		background: #ff5a5f;
+		color: #fff;
+		padding: 8px 15px;
+		font-size: 12px;
+		font-weight: 600;
+		margin-top: 30px;
+	}
+
+	.fcorn-register p>input,
+	.fcorn-register p>select {
+		display: inline-block;
+		width: 100%;
+		padding: 10px 15px;
+		font-weight: 100;
+		color: #686868;
+		border: 1px solid rgba(159, 159, 159, 0.2);
+		box-shadow: 0 0 3px rgba(60, 60, 60, 0.05);
+	}
+
+	.fcorn-register p>textarea {
+		display: inline-block;
+		width: 100%;
+		padding: 10px 15px;
+		font-weight: 100;
+		color: #686868;
+		border: 1px solid rgba(159, 159, 159, 0.2);
+		box-shadow: 0 0 3px rgba(60, 60, 60, 0.05);
+	}
+
+	/** To hide default arrow */
+	.fcorn-register p>select {
+		text-indent: 0.01px;
+		/** if it doesn't work change to something 0.05 etc... **/
+		text-overflow: "";
+		-webkit-appearance: none;
+		-moz-appearance: none;
+	}
+
+	.fcorn-register p.city-wrap,
+	.fcorn-register p.country-wrap {
+		position: relative;
+	}
+
+	.fcorn-register p.city-wrap:before,
+	.fcorn-register p.country-wrap:before {
+		/** For custom arrow in select box **/
+		position: absolute;
+		content: "#";
+		font-family: "entypo";
+		font-size: 18px;
+		color: #686868;
+		top: 10px;
+		right: 25px;
+	}
+
+	/** Register Toogle Btn **/
+	.fcorn-register p.register-toggle {
+		position: relative;
+	}
+
+	.fcorn-register p.register-toggle>.info {
+		font-size: 13px;
+		margin-left: 20px;
+	}
+
+	.fcorn-register p.register-toggle>label.toggle-label {
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-o-user-select: none;
+		user-select: none;
+		cursor: pointer;
+		display: inline-block;
+		background: #ff5a5f;
+		width: 60px;
+		height: 24px;
+		float: left;
+		position: relative;
+		font-size: 10px;
+		color: #fff;
+	}
+
+	.fcorn-register p.register-toggle>label.toggle-label>input.toggle-input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+	}
+
+	/** this is for labeling of on/off text **/
+	.fcorn-register p.register-toggle>label.toggle-label:before,
+	.fcorn-register p.register-toggle>label.toggle-label:after {
+		position: absolute;
+		top: 30%;
+		line-height: 1.1;
+		font-weight: 100;
+	}
+
+	.fcorn-register p.register-toggle>label.toggle-label:before {
+		content: attr(data-on);
+		left: 7px;
+	}
+
+	.fcorn-register p.register-toggle>label.toggle-label:after {
+		content: attr(data-off);
+		right: 7px;
+	}
+
+	/** handle switch **/
+	.fcorn-register p.register-toggle>label.toggle-label .toggle-handle {
+		position: absolute;
+		background: #fff;
+		left: 0;
+		top: 0;
+		border: 1px solid #ff5a5f;
+		display: inline-block;
+		-webkit-transition: 0.2s;
+		transition: 0.2s;
+		box-shadow: inset 0 0 5px rgba(50, 50, 50, 0.1);
+		width: 50%;
+		height: inherit;
+	}
+
+	.fcorn-register p.register-toggle>label.toggle-label>input.toggle-input:checked~.toggle-handle {
+		left: 30px;
+	}
+
+	/* Register button */
+	.fcorn-register p.register-submit {
+		display: inline-block;
+		float: right;
+	}
+
+	.fcorn-register p.register-submit>input {
+		border: none;
+		width: 200px;
+		color: #fff;
+		padding: 10px 15px;
+		background: #ff5a5f;
+		text-align: center;
+		letter-spacing: 1px;
+		box-shadow: 0 1px 1px #ff5a5f;
+	}
+
+	.fcorn-register p.register-cancel {
+		display: inline-block;
+		/* float: right; */
+	}
+
+	.fcorn-register p.register-cancel>input {
+		border: none;
+		width: 200px;
+		color: #fff;
+		padding: 10px 15px;
+		background: #dbd9d9;
+		text-align: center;
+		letter-spacing: 1px;
+		box-shadow: 0 1px 1px #dbd9d9;
+	}
+
+	/*upload image*/
+
+	.file-upload {
+		background-color: #ffffff;
+		width: 600px;
+		margin: 0 auto;
+		padding: 20px;
+	}
+
+	.file-upload-btn {
+		width: 100%;
+		margin: 0;
+		color: #fff;
+		background: #ff5a5f;
+		border: none;
+		padding: 10px;
+		border-radius: 4px;
+		/* border-bottom: 4px solid #ff5a5f; */
+		transition: all .2s ease;
+		outline: none;
+		text-transform: uppercase;
+		font-weight: 700;
+	}
+
+	.file-upload-btn:hover {
+		background: #ff5a5f;
+		color: #ffffff;
+		transition: all .2s ease;
+		cursor: pointer;
+	}
+
+	.file-upload-btn:active {
+		border: 0;
+		transition: all .2s ease;
+	}
+
+	.file-upload-content {
+		display: none;
+		text-align: center;
+	}
+
+	.file-upload-input {
+		position: absolute;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		outline: none;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	.image-upload-wrap {
+		margin-top: 20px;
+		border: 4px dashed #ff5a5f;
+		position: relative;
+	}
+
+	.image-dropping,
+	.image-upload-wrap:hover {
+		background-color: #ff5a5f42;
+		border: 4px dashed #ffffff;
+	}
+
+	.image-title-wrap {
+		padding: 0 15px 15px 15px;
+		color: #222;
+	}
+
+	.drag-text {
+		text-align: center;
+	}
+
+	.drag-text h3 {
+		font-weight: 100;
+		text-transform: uppercase;
+		color: #15824B;
+		padding: 60px 0;
+	}
+
+	.file-upload-image {
+		max-height: 200px;
+		max-width: 200px;
+		margin: auto;
+		padding: 20px;
+	}
+
+	.remove-image {
+		width: 200px;
+		margin: 0;
+		color: #fff;
+		background: #cd4535;
+		border: none;
+		padding: 10px;
+		border-radius: 4px;
+		border-bottom: 4px solid #b02818;
+		transition: all .2s ease;
+		outline: none;
+		text-transform: uppercase;
+		font-weight: 700;
+	}
+
+	.remove-image:hover {
+		background: #c13b2a;
+		color: #ffffff;
+		transition: all .2s ease;
+		cursor: pointer;
+	}
+
+	.remove-image:active {
+		border: 0;
+		transition: all .2s ease;
+	}
+
+	:required:invalid {
+		border: 1px solid #ffb400;
+		background-color: #fff8e5;
+	}
+
+	.btn {
+	position: relative;
+	display: block;
+	/* margin: 30px auto; */
+	/* padding: 0; */
+	/* text-align: center !important; */
+	/* overflow: hidden; */
+	padding: 0px;
+	box-sizing: border-box;
+	/* border-width: 0; */
+	outline: none;
+	border-radius: 2px;
+	/* box-shadow: 0 1px 4px rgba(0, 0, 0, .6); */
+	
+	background-color: #e9e5e5;
+	color: #ff5a5f !important;
+	
+	transition: background-color .3s;
+	}
+
+	.btn:hover, .btn:focus {
+	color: white !important;
+	background-color: #ff5a5f;
+	border: none !important;
+	}
+	
+	.dropdown dd,
+	.dropdown dt {
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.dropdown ul {
+		margin: -1px 0 0 0;
+	}
+	
+	.dropdown dd {
+		position: relative;
+	}
+	
+	.dropdown a,
+	.dropdown a:visited {
+		text-decoration: none;
+		outline: none;
+	}
+	
+	.dropdown dt a {
+		display: block;
+		padding: 7px 15px;
+		height: 40px;
+		line-height: 24px;
+		overflow: hidden;
+		width: 100%;
+		border: 1px solid rgba(159, 159, 159, 0.2);
+		box-shadow: 0 0 3px rgba(60, 60, 60, 0.05);
+	}
+	
+	.dropdown dt a span,
+	.multiSel span {
+		cursor: pointer;
+		display: inline-block;
+		padding: 0 3px 2px 0;
+	}
+	
+	.dropdown dd ul {
+		background-color: #fafafa;
+		color: #000;
+		display: none;
+		left: 0px;
+		padding: 2px 15px 2px 5px;
+		position: absolute;
+		top: 2px;
+		width: 100%;
+		list-style: none;
+		height: 200px;
+		overflow: auto;
+		z-index: 1000;
+		border: 1px solid rgba(159, 159, 159, 0.2);
+		box-shadow: 0 0 3px rgba(60, 60, 60, 0.05);
+	}
+	
+	.dropdown span.value {
+		display: none;
+	}
+	
+	.dropdown dd ul li a {
+		padding: 5px;
+		display: block;
+	}
+	
+	.dropdown dd ul li a:hover {
+		background-color: #fff;
+	}
+</style>
+
+<link href="https://a0.muscache.com/airbnb/static/packages/dls/common_o2.1_cereal-5b1258a20d28a7001c7107711f62b5f1.css"
+ media="all" rel="stylesheet" type="text/css" />
+<link href="https://a0.muscache.com/airbnb/static/packages/common-7d0f582f30cdc661f9c474f22e4da235.css" media="all" rel="stylesheet"
+ type="text/css" />
+
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="page-container-responsive space-top-4 space-4">
+	<div class="row">
+		{% include 'user/user_sidebar.html' %}
+		<div class="col-md-9">
+			<!-- Register Form -->
+			<div>
+				<form class="fcorn-register container" method="post" action="{% url 'property_register_submit' %}" enctype="multipart/form-data" method="post">
+					<div class="row">
+						<p class="col-md-10" style="color:#686868; font-weight: bold">* Note: All fields are required.</p>
+						<a class="btn col-md-2" onclick="delete_property('{{ property_detail.id }}');">Delete</a>
+					</div>
+					
+					<input type="hidden" value="{{ property_detail.id }}" name="id">
+					<input type="hidden" value="{{ property_detail.latitude }}" name="latitude" id="latitude">
+					<input type="hidden" value="{{ property_detail.longitude }}" name="longitude" id="longitude">
+					<div class="row">
+						<p class="col-md-9"><input name="name" type="text" placeholder="Title" value="{{ property_detail.name }}" required></p>
+						<p class="col-md-3"><input name="city" type="text" placeholder="City" value="{{ property_detail.city }}" required></p>
+					</div>
+
+
+					<div class="row">
+						<p class="col-md-6"><input name="daily_price" type="number" min="0" placeholder="$ Daily Price" value="{{ property_detail.daily_price }}" required></p>
+						<p class="col-md-6"><input name="clean_fee" type="number" min="0" placeholder="$ Clean Fee" value="{{ property_detail.clean_fee }}" required></p>
+					</div>
+
+					<p><input type="text" name="address" placeholder="Address" value="{{ property_detail.address }}" required></p>
+
+					<div class="row" style="padding-left: 12px;width: 740px;margin-bottom: 15px;">
+						<dl class="dropdown">
+							<dt>
+								<a style="color:#686868;">
+									<span class="hida" style="font-weight: 100;font-family: Circular,'Helvetica Neue',Helvetica,Arial,sans-serif;">
+										Select Facilities</span>
+									<p class="multiSel"></p>
+								</a>
+							</dt>
+					
+							<dd>
+								<div class="mutliSelect">
+									<ul style="display: none;">
+										{% for k,v in facilities.items %}
+											<li><input type="checkbox" name="{{k}}" value="{{v}}">{{v}}</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</dd>
+						</dl>
+					</div>
+
+					<div class="row">
+						<p class="col-md-3 city-wrap">
+							<select required name="room_number">
+								<option value="" {% ifequal property_detail.room_number 0 %} selected {% endifequal %} disabled>Room</option>
+								<option value="1" {% ifequal property_detail.room_number 1 %} selected {% endifequal %}>1</option>
+								<option value="2" {% ifequal property_detail.room_number 2 %} selected {% endifequal %}>2</option>
+								<option value="3" {% ifequal property_detail.room_number 3 %} selected {% endifequal %}>3</option>
+								<option value="4" {% ifequal property_detail.room_number 4 %} selected {% endifequal %}>4</option>
+								<option value="5" {% ifequal property_detail.room_number 5 %} selected {% endifequal %}>5</option>
+							</select>
+						</p>
+						<p class="col-md-3 city-wrap">
+							<select required name="bed_number">
+								<option value="" {% ifequal property_detail.maximum_bed_number 0 %} selected {% endifequal %} disabled>Bed</option>
+								<option value="1" {% ifequal property_detail.maximum_bed_number 1 %} selected {% endifequal %}>1</option>
+								<option value="2" {% ifequal property_detail.maximum_bed_number 2 %} selected {% endifequal %}>2</option>
+								<option value="3" {% ifequal property_detail.maximum_bed_number 3 %} selected {% endifequal %}>3</option>
+								<option value="4" {% ifequal property_detail.maximum_bed_number 4 %} selected {% endifequal %}>4</option>
+								<option value="5" {% ifequal property_detail.maximum_bed_number 5 %} selected {% endifequal %}>5</option>
+							</select>
+						</p>
+						<p class="col-md-3 city-wrap">
+							<select required name="tenant_number">
+								<option value="" {% ifequal property_detail.maximum_tenant 0 %} selected {% endifequal %} disabled>Tenant</option>
+								<option value="1" {% ifequal property_detail.maximum_tenant 1 %} selected {% endifequal %}>1</option>
+								<option value="2" {% ifequal property_detail.maximum_tenant 2 %} selected {% endifequal %}>2</option>
+								<option value="3" {% ifequal property_detail.maximum_tenant 3 %} selected {% endifequal %}>3</option>
+								<option value="4" {% ifequal property_detail.maximum_tenant 4 %} selected {% endifequal %}>4</option>
+								<option value="5" {% ifequal property_detail.maximum_tenant 5 %} selected {% endifequal %}>5</option>
+							</select>
+						</p>
+						<p class="col-md-3 city-wrap">
+							<select required name="bathroom_number">
+								<option value="" {% ifequal property_detail.bathroom_number 0 %} selected {% endifequal %} disabled>Bathroon</option>
+								<option value="1" {% ifequal property_detail.bathroom_number 1 %} selected {% endifequal %}>1</option>
+								<option value="2" {% ifequal property_detail.bathroom_number 2 %} selected {% endifequal %}>2</option>
+								<option value="3" {% ifequal property_detail.bathroom_number 3 %} selected {% endifequal %}>3</option>
+								<option value="4" {% ifequal property_detail.bathroom_number 4 %} selected {% endifequal %}>4</option>
+								<option value="5" {% ifequal property_detail.bathroom_number 5 %} selected {% endifequal %}>5</option>
+							</select>
+						</p>
+					</div>
+
+					<p>
+						<textarea name="description" row=7 cols="100" placeholder="Description" required style="height:200px">{% ifnotequal property_detail.description None %}{{ property_detail.description }}{% endifnotequal %}</textarea>
+					</p>
+					<p>
+						<textarea name="policy" row="7" cols="100" placeholder="Policy" required style="height:200px">{{ property_detail.policy }}</textarea>
+					</p>
+
+					<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+					<div class="file-upload">
+						<button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add
+							Image</button>
+
+						<div class="image-upload-wrap">
+							<input class="file-upload-input" name="image_file" type='file' onchange="readURL(this);" accept="image/*" />
+							<div class="drag-text">
+								<h3 style="color: #ff5a5f">Drag and drop a file or select add Image</h3>
+							</div>
+						</div>
+						<div class="file-upload-content">
+							<img class="file-upload-image" src="#" alt="your image" />
+							<div class="image-title-wrap">
+								<button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded
+										Image</span></button>
+							</div>
+						</div>
+					</div>
+
+
+					<br>
+					<br>
+					<br>
+
+					<p class="register-toggle">
+						<label for="register-agree" class="toggle-label" data-on="" data-off="">
+							<input type="checkbox" id="register-agree" class="toggle-input" onclick="agree_toggle();">
+							<span class="toggle-handle"></span>
+						</label>
+						<span class="info" style="font-weight:bold;">Choose location</span>
+
+						<div class="row" id="map_div" style="display: none;">
+							<div id="map" class="" style="height: 200px;"></div>
+						</div>
+					</p>
+					<p class="register-cancel"><input type="cancel" value="Cancel" onClick="history.back(-1);"></p>
+					<p class="register-submit"><input type="submit" value="{% if edit %}Save{% else %}Register Now{% endif %}"></p>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		//Google Maps JS
+		//Set Map
+		function initialize() {
+			var lan = -33.8688;
+			var lon = 151.2093;
+			if('{{ property_detail.latitude }}' != 'None') lan = parseFloat('{{ property_detail.latitude }}');
+			if('{{ property_detail.longitude }}' != 'None') lon = parseFloat('{{ property_detail.longitude }}');
+			console.log(lan, lon);
+			var myLatlng = new google.maps.LatLng(lan, lon);
+			var imagePath = "/app/media/static/assets/pin.png";
+			var mapOptions = {
+				zoom: 15,
+				center: myLatlng,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			console.log(myLatlng);
+			var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+			var infowindow = new google.maps.InfoWindow({
+				content: '',
+				maxWidth: 500
+			});
+
+			//Add Marker
+			var marker = new google.maps.Marker({
+				position: myLatlng,
+				map: map,
+				icon: imagePath,
+				title: ''
+			});
+
+			google.maps.event.addListener(marker, 'click', function (event) {
+				infowindow.open(map, marker);
+			});
+
+			google.maps.event.addListener(map, 'click', function(event) {
+				// console.log( 'Lat: ' + event.latLng.lat() + ' and Longitude is: ' + event.latLng.lng() );
+				marker.setPosition(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
+			    map.panTo(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
+				$('#latitude').val(event.latLng.lat());
+				$('#longitude').val(event.latLng.lng());
+			});
+
+			//Resize Function
+			google.maps.event.addDomListener(window, "resize", function () {
+				var center = map.getCenter();
+				google.maps.event.trigger(map, "resize");
+				map.setCenter(center);
+			});
+
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	});
+</script>	
+<script>
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				$('.image-upload-wrap').hide();
+
+				$('.file-upload-image').attr('src', e.target.result);
+				$('.file-upload-content').show();
+
+				$('.image-title').html(input.files[0].name);
+			};
+
+			reader.readAsDataURL(input.files[0]);
+
+		} else {
+			removeUpload();
+		}
+	}
+
+	var agree_value = false;
+	function agree_toggle() {
+		// agree_value = !agree_value;
+		$("#map_div").toggle("fast");
+	}
+
+	function removeUpload() {
+		$('.file-upload-input').replaceWith($('.file-upload-input').clone());
+		$('.file-upload-content').hide();
+		$('.image-upload-wrap').show();
+	}
+	$('.image-upload-wrap').bind('dragover', function () {
+		$('.image-upload-wrap').addClass('image-dropping');
+	});
+	$('.image-upload-wrap').bind('dragleave', function () {
+		$('.image-upload-wrap').removeClass('image-dropping');
+	});
+
+	function delete_property(id) {
+        $.post("{% url 'delete_property' %}", 
+        {
+            pid: id
+        },function(data, status) {
+            if(data == '1') {
+                alert("delete succeed!");
+				history.back(-1);
+            } else {
+                window.location = '{% url "user_properties" %}';
+            }
+        });
+	}
+</script>
+<script>
+
+	$(".dropdown dt a").on('click', function () {
+		$(".dropdown dd ul").slideToggle('fast');
+	});
+
+	$(".dropdown dd ul li a").on('click', function () {
+		$(".dropdown dd ul").hide();
+	});
+
+	function getSelectedValue(id) {
+		return $("#" + id).find("dt a span.value").html();
+	}
+
+	$(document).bind('click', function (e) {
+		var $clicked = $(e.target);
+		if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+	});
+
+	$('.mutliSelect input[type="checkbox"]').on('click', function () {
+
+		var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+			title = $(this).val() + ",";
+
+		if ($(this).is(':checked')) {
+			var html = '<span title="' + title + '">' + title + '</span>';
+			$('.multiSel').append(html);
+			$(".hida").hide();
+		} else {
+			$('span[title="' + title + '"]').remove();
+			var ret = $(".hida");
+			$('.dropdown dt a').append(ret);
+		}
+	});
+</script>
+{% endblock %}

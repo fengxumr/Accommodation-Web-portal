@@ -1,0 +1,229 @@
+{% extends "user/base.html" %}
+
+{% block page_style %}
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="container">
+    <div class="row" style="margin-top:10px">
+        <div style="background-color: #fff;border-radius: 2px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+                    margin-top: 30px;margin: 0 auto;max-width: 330px;padding: 40px 40px;padding-top: 20px;">
+            <div id="login_form" class="collapse in">
+                <h1 style="margin-bottom:40px">Login</h1>
+                <form class="form-horizontal" method="post" action="{% url 'login_check' %}">                
+                    <div class="form-group">
+                        {% if wmsg %}
+                        <div class="alert alert-danger">Login failed!</div>
+                        {% endif %}
+                        <label for="name" class="cols-sm-2 control-label">Name</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Name"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" style="margin-top:20px;" class="btn btn-danger btn-lg btn-block">Login</button>
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <p>or</p>
+                        <a class="btn btn-danger btn-lg btn-block" onclick="swicth();" role="button">Register</a>
+                    </div>
+
+                    <!-- <div class="form-group" style="text-align:center;margin-bottom:0px;">
+                        <a href="{# url 'reset_passwd' #}">forget your password?</a>
+                    </div> -->
+                </form>
+            </div>
+            <div id="register_form" class="collapse 
+                                            {%if register == 1 %}in{% endif %}">
+                <h1>Register</h1>
+                <form class="form-horizontal">
+                        
+                    <!-- <div class="form-group">
+                        <label for="confirm" class="cols-sm-2 control-label">Zid</label>
+                        <div class="alert alert-danger" id="zid_conflict" style="display:none;">Zid alread in use!</div>
+                        <div class="alert alert-danger" id="zid_error" style="display:none;">zid format should be like z5555555!</div>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-star fa-lg" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="zid" id="zid" value="{% if info %}{#info['zid']#}{% endif %}" placeholder="your user zid"/>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                        <div class="alert alert-danger" id="name_conflict" style="display:none;">Name exist!</div>
+                        <div class="alert alert-danger" id="name_error" style="display:none;">Name can only contain charactors, space, underscore!</div>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="name" id="user_name" value="{% if info %}{#info['name']#}{% endif %}" placeholder="Enter your Name"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                        <div class="alert alert-danger" id="email_conflict" style="display:none;">Email exist!</div>
+                        <div class="alert alert-danger" id="email_error" style="display:none;">invalid email address!</div>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="email" id="email" value="{% if info %}{#info['email']#}{% endif %}" placeholder="Enter your Email"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">Password</label>
+                        <div class="alert alert-danger" id="passwd_error" style="display:none;">password should be at least 6 charactors!</div>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="password" id="passwd" placeholder="Enter your Password"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                        <div class="alert alert-danger" id="confirm_error" style="display:none;">two passwords are not identical!</div>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <a style="margin-top:20px;" class="btn btn-danger btn-lg btn-block" onclick="register();">Register</a>
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <p>or</p>
+                        <a class="btn btn-danger btn-lg btn-block" onclick="swicth();" role="button">Login</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-sm" id="succeed_dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Register succeed!</h2>
+                    </div>
+                    <div class="modal-body">
+                        An email with confirmation link has been send to you, please login after verified.
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#succeed_dialog" role="button">confirm</a>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var nameRegx = /^[\w\d_\s]{3,}$/;
+    var mailRegx = /^[\d\w_-]+@[\d\w_-]+(\.[\w]+)+$/;
+    
+    function swicth() {
+        $('#login_form').collapse('toggle');
+        $('#register_form').collapse('toggle');
+    }
+
+    function register() {
+        var error = 0;
+        $('#email_conflict').css('display', 'none');
+        $('#name_conflict').css('display', 'none');
+
+        // check user name valid
+        var name = $('#user_name').val();
+        if(nameRegx.exec(name) == null || nameRegx.exec(name)[0] != name) {
+            $('#name_error').css('display', 'block');
+            error = 1;
+        } else {
+            $('#name_error').css('display', 'none');
+        }
+
+        // regx check email
+        var email = $('#email').val();
+        if(mailRegx.exec(email) == null || mailRegx.exec(email)[0] != email) {
+            $('#email_error').css('display', 'block');
+            error = 1;
+        } else {
+            $('#email_error').css('display', 'none');
+        }
+
+        // ckeck password right
+        var passwd = $('#passwd').val();
+        if (passwd.length < 6) {
+            error = 1;
+            $('#passwd_error').css('display', 'block');
+        } else {
+            $('#passwd_error').css('display', 'none');
+        }
+        var confirm = $('#confirm').val();
+        if (passwd == confirm) {
+            $('#confirm_error').css('display', 'none');
+            // console.log("same"+$('#confirm').val());
+        } else {
+            error = 1;
+            $('#confirm_error').css('display', 'block');
+            // console.log("not same");
+        }
+
+        // get all data and send them to server
+        // if succeed, pop up a window notify user to check their email and toggle to login form
+
+        if(error == 0) {
+            $.post("{% url 'register' %}",
+                {
+                    name: name,
+                    email: email,
+                    passwd: passwd
+                },
+                function (data, status) {
+                    console.log(data);
+                    if(data == '0') {
+                        $('#succeed_dialog').modal('show');
+                        
+                        $('#zid').val("");
+                        $('#user_name').val("");
+                        $('#email').val("");
+                        $('#passwd').val("");
+                        $('#confirm').val("");
+                        swicth();
+                    } else {
+                        if(data == '1') {
+                            $('#name_conflict').css('display', 'block');
+                        }
+                        if(data == '2') {
+                            $('#email_conflict').css('display', 'block');
+                        }
+                    }
+                }
+            )
+        } else  {
+            return;
+        }
+    }
+</script>
+{% endblock %}

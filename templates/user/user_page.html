@@ -1,0 +1,247 @@
+{% extends 'user/base.html' %}
+
+{% block page_style %}
+<link href="https://a0.muscache.com/airbnb/static/packages/dls/common_o2.1_cereal-5b1258a20d28a7001c7107711f62b5f1.css"
+    media="all" rel="stylesheet" type="text/css" />
+<link href="https://a0.muscache.com/airbnb/static/packages/common-7d0f582f30cdc661f9c474f22e4da235.css" media="all" rel="stylesheet"
+    type="text/css" />
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="page-container-responsive space-top-4 space-4">
+    <div class="row">
+        {% include 'user/user_sidebar.html' %}
+        <div class="col-md-9">
+            <div class="dashboard-content">
+                <form method="post" action="{% url 'user_page_edit' %}">
+                    <div class="panel space-4">
+                        <div class="panel-header">
+                            <h2 class="edit-profile-section-heading">
+                                Profile
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row row-condensed space-4">
+                                <label class="text-right col-sm-3" for="user_first_name">
+                                    Nick Name
+                                </label>
+                                <div class="col-sm-9">
+                                    <input size="30" type="text" value="{{ user.username }}" readonly>
+                                    <div class="text-muted space-top-1">Nick name will be shown to others.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="row row-condensed space-4">
+                                <label class="text-right col-sm-3" for="user_first_name">
+                                    First Name
+                                </label>
+                                <div class="col-sm-9">
+                                    <input id="user_first_name" name="first_name" size="30" type="text" value="{{ user.first_name }}">
+                                </div>
+                            </div>
+
+                            <div class="row row-condensed space-4">
+                                <label class="text-right col-sm-3" for="user_last_name">
+                                    Last Name
+                                </label>
+                                <div class="col-sm-9">
+                                    <input id="user_last_name" name="last_name" size="30" type="text" value="{{ user.last_name }}">
+                                    <div class="text-muted space-top-1">Your public profile only shows your first name.
+                                        When you request
+                                        a
+                                        booking, your host will see your first and last name.</div>
+                                </div>
+                            </div>
+
+                            <div class="row row-condensed space-4">
+                                <label class="text-right col-sm-3" for="user_sex">
+                                    Gender <i class="icon icon-lock icon-ebisu" data-behavior="tooltip" role="img"
+                                        tabindex="0"></i>
+                                </label>
+                                <div class="col-sm-9">
+
+                                    <div class="select">
+                                        <select id="user_sex" name="gender">
+                                            {% for k,v in GENDER_CHOICES %}
+                                            <option value="{{ k }}" {% ifequal user.gender k %} selected 
+                                            {% endifequal %}>{{ v }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="text-muted space-top-1">We use this data for analysis and never share
+                                        it
+                                        with other
+                                        users.</div>
+                                </div>
+                            </div>
+
+                            <div class="row row-condensed space-4">
+                                <label class="text-right col-sm-3" for="user_birthdate">
+                                    Birth Date <i class="icon icon-lock icon-ebisu" data-behavior="tooltip" role="img"
+                                        tabindex="0"></i>
+                                </label>
+                                <div class="col-sm-9">
+
+                                    <fieldset>
+                                        <legend class="screen-reader-only">Birthday</legend>
+                                        <div class="select">
+                                            <select aria-label="Month" id="user_birthdate_2i" name="user[birthdate(2i)]">
+                                                <option value="">Month</option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                        <div class="select">
+                                            <select aria-label="Day" id="user_birthdate_3i" name="user[birthdate(3i)]">
+                                                <option value="">Day</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+
+                                        </div>
+                                        <div class="select">
+                                            <select aria-label="Year" id="user_birthdate_1i" name="user[birthdate(1i)]">
+                                                <option value="">Year</option>
+                                            </select>
+
+                                        </div>
+                                    </fieldset>
+
+                                    <div class="text-muted space-top-1">The magical day you were dropped from the sky
+                                        by a
+                                        stork. We use
+                                        this data for analysis and never share it with other users.</div>
+                                </div>
+                            </div>
+
+                            <div class="row row-condensed space-4">
+                                <label class="text-right col-sm-3" for="user_email">
+                                    Email Address <i class="icon icon-lock icon-ebisu" data-behavior="tooltip" role="img"
+                                        tabindex="0"></i>
+                                </label>
+                                <div class="col-sm-9">
+
+                                    <input id="user_email" name="email" size="30" type="text" value="{{ user.email }}">
+
+                                    <div class="text-muted space-top-1">We won’t share your private email address with
+                                        other BeerAnA
+                                        users.</div>
+                                </div>
+                            </div>
+
+                            <div class="row row-condensed space-4">
+                                <label class="text-right col-sm-3" for="user_phone">
+                                    Phone Number <i class="icon icon-lock icon-ebisu" data-behavior="tooltip" role="img"
+                                        tabindex="0"></i>
+                                </label>
+                                <div class="col-sm-9">
+
+                                    <div class="clearfix" id="phone-number">
+                                        <div class="phone-numbers-container has-phone-numbers">
+                                            <div class="phone-numbers-hide-during-verify">
+                                                <table class="phone-numbers-table" cellspacing="0" cellpadding="0">
+                                                    <tbody>
+                                                        <input id="phone_number" name="phone_number" size="30" type="text"
+                                                            value="{{ user.phone_number }}">
+                                                    </tbody>
+                                                </table>
+
+                                                <a class="add link-icon" href="#">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row row-condensed space-4">
+                                    <label class="text-right col-sm-3" for="user_profile_info_about">
+                                        Describe Yourself
+                                    </label>
+                                    <div class="col-sm-9">
+
+                                        <textarea cols="40" id="self_description" name="self_description" rows="5">{{ user.self_description }}</textarea>
+
+                                        <div class="text-muted space-top-1">BeerAnA is built on relationships. Help
+                                            other
+                                            people get to know
+                                            you.<br><br>Tell them about the things you like: What are 5 things you
+                                            can’t
+                                            live without? Share
+                                            your favourite travel destinations, books, movies, shows, music, food.<br><br>Tell
+                                            them what it’s
+                                            like to have you as a guest or host: What’s your style of travelling? Of
+                                            BeerAnA
+                                            hosting?<br><br>Tell
+                                            them about you: Do you have a life motto?</div>
+                                    </div>
+                                </div>
+
+                                <div class="row row-condensed space-4">
+                                    <label class="text-right col-sm-3">
+                                        <button type="submit" class="btn btn-primary btn-large">
+                                            Save
+                                        </button>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{# csrf_token() #}'
+        }
+    });
+
+    function fileSelect() {
+        $('#fileToUpload').click();
+
+    }
+
+    function fileSelected() {
+        var options = {
+            type: 'POST',
+            success: function (data) {
+                location.reload();
+            }
+        }
+        $('#avatar_upload').ajaxSubmit(options);
+    }
+
+    function edit_mode() {
+        // $('#username').attr("readonly", false);
+        // $('#email').attr("readonly", false);
+        $('#avatar').click(fileSelect);
+        $('#phone_number').attr("readonly", false);
+        $('#birthday').attr("readonly", false);
+        $('#link').attr("readonly", false);
+        $('#gender').attr("disabled", false);
+        $('#self_description').attr("readonly", false);
+        $('#edit_button').hide();
+        $('#submit_button').show();
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>BeerAnA</title>
+    
+    <!-- Fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'
+    type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    
+    <!-- Styles -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    
+
+    {% block page_style %}
+    {% endblock %}
+
+    <style>
+        body {
+            font-family: 'Lato';
+        }
+        .fa-btn {
+            margin-right: 6px;
+        }
+        .avatar {
+            width:200px;
+            height:200px;
+        }
+
+        .sm-avatar {
+            border-radius: 50%;
+            width:40px;
+            height:40px;
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: #e9ebee;">
+<nav class="navbar navbar-default navbar-static-top" style="background-color: #ff5a5f;">
+    <div class="container">
+        <div class="navbar-header">
+
+            <!-- Collapsed Hamburger -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#app-navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Branding Image -->
+            <a class="navbar-brand" href="{% url 'index' %}" style="color:white;font-size:20px;">
+                BeerAnA
+            </a>
+            
+            <form class="narbar-form navbar-left" role="search" method="get" action="{% url 'search' %}">  
+                <div class="form-group col-xs-12" style="margin-top: 7px;margin-bottom: 7px;">  
+                    <input type="text" name="keywords" placeholder="Search" class="form-control" style="border: antiquewhite;">
+                </div> 
+            </form>
+        </div>
+
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            {% if user.is_authenticated %}
+            <ul class="nav navbar-nav">
+                <!-- <li><a href="{#  #}" style="color:white;">timeline</a></li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'logout' %}" style="color:white;">Logout</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <a style="padding:0px;" href="{% url 'user_page' %}">
+                    <img class="sm-avatar" src="/app/{{ user.avatar.url }}">
+                </a>
+            </ul>
+
+            {% else %}
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'login' %}" style="color:white;">Login</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+{% block body_contents %}
+{% endblock %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+{% block scripts %}
+{% endblock %}
+
+</body>
+</html>

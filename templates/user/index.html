@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> BeerAnA </title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- for new search bar -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.css" rel="stylesheet">
+
+</head>
+
+<style>
+    .avatar {
+        width:200px;
+        height:200px;
+    }
+
+    .sm-avatar {
+        border-radius: 50%;
+        width:40px;
+        height:40px;
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #header {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        background-image: url(http://www.sydneyvaluecruises.com.au/images/banner.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #nav {
+        position: absolute;
+        width: 100%;
+        height: 50px;
+    }
+
+    #logo_text {
+        position: absolute;
+        display: inline;
+        top: 15px;
+        left: 30px;
+        font-size: 32px;
+        /*font-family: "Comic Sans MS", cursive, sans-serif;*/
+        color: #ff5a5f;
+        font-weight: bold;
+    }
+
+    .nav_links {
+        display: inline;
+        font-family: sans-serif;
+        color: white;
+        text-decoration: none;
+        float: right;
+        margin: 12px;
+        margin-top: 11px;
+        padding: 8px;
+    }
+
+    #welcome_text_div {
+        background-color: rgba;
+        width: 800px;
+        height: 300px;
+        position: absolute;
+        top: 50%;
+        margin-top: -150px;
+        left: 50%;
+        margin-left: -400px;
+    }
+
+    #welcome_text {
+        color: white;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 55px;
+        text-align: center;
+        padding: 25px;
+    }
+
+    #welcome_under_text {
+        color: white;
+        font-family: sans-serif;
+        text-align: center;
+        font-weight: bold;
+        margin-top: -50px;
+    }
+
+    #searchbar_div {
+        position: absolute;
+        width: 100%;
+        height: 100px;
+        background-color: rgba(0, 0, 0, 0.8);
+        bottom: 0;
+    }
+
+    #searchbar {
+        position: absolute;
+        width: 800px;
+        height: 45px;
+        background-color: white;
+        top: 50%;
+        margin-top: -22.5px;
+        left: 50%;
+        margin-left: -400px;
+        border-radius: 3px;
+    }
+
+    #where_div {
+        position: absolute;
+        width: 400px;
+        height: 45px;
+        /*border-right: 1px solid lightgray;*/
+        top: 20%;
+    }
+
+    #where_text {
+        color: lightgray;
+        font-family: sans-serif;
+        margin-left: 15px;
+    }
+
+    #search_button_div {
+        position: absolute;
+        width: 110px;
+        height: 45px;
+        left: 730px;
+        top: -2px;      
+    }
+
+    #search_button:link {
+        position: absolute;
+        font-family: sans-serif;
+        background-color: #ff3655;
+        color: white;
+        text-decoration: none;
+        padding: 12.5px 30px 12.5px 30px;
+        border-radius: 3px;
+    }
+
+    #search_button:visited {
+        color: white;
+        text-decoration: none;
+        font-family: sans-serif;
+    }
+
+    #search_button:hover {
+        background-color: #ff5b74;
+    }
+
+    .view-group {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    .thumbnail
+    {
+        margin-bottom: 30px;
+        padding: 10px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+    }
+
+    .item.list-group-item
+    {
+        float: none;
+        width: 100%;
+        /*background-color: #fff;*/
+        background-color: transparent;
+        margin-bottom: 30px;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0 1rem;
+        border: 0;
+    }
+    .item.list-group-item .img-event {
+        float: left;
+        width: 30%;
+    }
+
+    .item.list-group-item .list-group-image
+    {
+        margin-right: 10px;
+
+    }
+    .item.list-group-item .thumbnail
+    {
+        margin-bottom: -7px;
+        margin-left: -16px;
+        margin-right: -17px;
+        display: inline-block;
+    }
+    .item.list-group-item .caption
+    {
+        float: left;
+        width: 70%;
+        margin: 0;
+    }
+
+    .item.list-group-item:before, .item.list-group-item:after
+    {
+        display: table;
+        content: " ";
+    }
+
+    .item.list-group-item:after
+    {
+        clear: both;
+    }
+
+    body {
+        /* background: url(http://fantasai.inkedblade.net/style/design/w3c-restyle/2016/logos/UD-watermark.png); */
+        background: url(media/static/assets/background.001.jpeg);
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .imgsize {
+        width:100%;
+        height: 200px;
+    }
+
+    .card {
+        background-color: transparent;
+        border: none;
+    }
+
+    .block-with-text {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;  
+    }
+
+    .block-with-title {
+        line-height: 1.5em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+
+    /* search bar */
+
+
+    #searchbar_div {
+        position: absolute;
+        width: 100%;
+        height: 100px;
+        background-color: rgba(0, 0, 0, 0.8);
+        bottom: 0;
+    }
+
+    #searchbar {
+        position: absolute;
+        width: 800px;
+        height: 45px;
+        background-color: white;
+        left:0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        border-radius: 3px;
+    }
+
+    .where {
+        position: absolute;
+        width: 380px;
+        height: 43px;
+        margin-left: 10px;
+        margin-top: 0.9px;
+        border-style: none;
+        background-color: rgba(0, 0, 0, 0);
+        font-size:15px;
+        outline:0;
+    }
+
+    .check_in {
+        position: absolute;
+        width: 100px;
+        height: 43px;
+        margin-left: 10px;
+        margin-top: 0.9px;
+        left: 400px;
+        border-style: none;
+        background-color: rgba(0, 0, 0, 0);
+        font-size:15px;
+        outline:0;
+        border-left: 1px solid lightgray;
+        text-align: center;
+    }
+
+    .check_out {
+        position: absolute;
+        width: 100px;
+        height: 43px;
+        margin-left: 10px;
+        margin-top: 0.9px;
+        left: 510px;
+        border-style: none;
+        background-color: rgba(0, 0, 0, 0);
+        font-size:15px;
+        outline:0;
+        border-left: 1px solid lightgray;
+        text-align: center;
+    }
+
+    .guest {
+        position: absolute;
+        width: 80px;
+        height: 43px;
+        margin-left: 10px;
+        margin-top: 0.9px;
+        left: 620px;
+        border-style: none;
+        background-color: rgba(0, 0, 0, 0);
+        font-size:15px;
+        outline:0;
+        border-left: 1px solid lightgray;
+        border-radius: 0;
+        -webkit-appearance: none;
+        text-align-last: center;
+        color: #636c72;
+    }
+
+    #search_button {
+        position: absolute;
+        width: 110px;
+        height: 45px;
+        left: 730px;    
+        /* margin-top: 0.9px; */
+        background-color: #ff3655;
+        border-style: none;
+        color: white;
+        border-radius: 3px;
+        font-size:15px;
+        outline:0;
+    }
+
+    #search_button:visited {
+        color: white;
+        text-decoration: none;
+    }
+
+    #search_button:hover {
+        background-color: #ff5b74;
+    }
+
+    .col-md-2,.col-md-3,.col-md-12{
+    position:relative;
+    display: block;
+    float: left;
+    padding: 0 6px;
+    }
+    footer{
+    /*background-image: url(https://a0.muscache.com/airbnb/static/footer/background-317dd7c2cb678ddbdb0a983d511cb9a0.png);*/
+    background-color: #2b2d2e;
+    color: #fff;
+    padding: 50px 0;
+    }
+    .container_2{
+    width: 1045px;
+    margin: 0 auto;
+    }
+    .row_2{
+    padding: 0 50px;
+    clear: both;
+    position: relative;
+    }
+
+    hr{
+    border-color: rgba(255,255,255,0.2);
+    
+    }
+    .text-center{
+    width: 100%;
+    text-align: center;
+    }
+    .text-center a{
+    font-size: .9em;
+    padding: 11px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    display:inline-block;
+    color: #fff;
+    position:relative;
+    margin: 0 4px;
+    }
+    a:hover{
+    color: rgba(255,255,255,0.2);
+    }
+    a i{
+    width: 17px;
+    height: 17px;
+    }
+
+    /* topic */
+
+    .topic_word {
+        color: #545454;
+        font-family: sans-serif;
+        text-align: left;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+
+    /* request form */
+    .req_form {
+    font-family: 'Open Sans', Arial, sans-serif;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    /* padding: 30px; */
+    /* margin: 10px 1%; */
+    min-height: 260px;
+    min-width: 130px;
+    /* max-width: 240px; */
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.4em;
+    background-color: rgba(255, 255, 255, 0);
+    }
+    .req_form * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+    }
+    .req_form .background {
+    width: 100%;
+    vertical-align: top;
+    opacity: 0.2;
+    -webkit-filter: grayscale(100%) blur(10px);
+    filter: grayscale(100%) blur(10px);
+    -webkit-transition: all 2s ease;
+    transition: all 2s ease;
+    }
+    .req_form figcaption {
+    width: 100%;
+    padding: 15px 25px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    }
+    .req_form .profile {
+    border-radius: 50%;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    max-width: 100px;
+    opacity: 1;
+    /* box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5); */
+    /* border: 2px solid rgba(255, 255, 255, 0.5); */
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    }
+    .req_form h3 {
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: 100;
+    color: gray;
+    }
+    .req_form h3 span {
+    /* display: block; */
+    font-size: 1.2em;
+    color: #ff5a5f;
+    opacity: 0.75;
+    white-space: nowrap;
+    }
+    .req_form i {
+    padding: 10px 5px;
+    display: inline-block;
+    font-size: 32px;
+    color: #ffffff;
+    text-align: center;
+    opacity: 0.65;
+    }
+    .req_form a {
+    text-decoration: none;
+    }
+    .req_form i:hover {
+    opacity: 1;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+    }
+    .req_form:hover .background,
+    .req_form.hover .background {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+    }
+
+
+
+
+    /* comment */
+
+    .pop-window {
+    width: 500px;
+    z-index: 2999;
+    background: #fff;
+    margin: 0 auto;
+    border: 2px solid #cdcdcd;
+    padding: 20px;
+    position: fixed;
+    top: 30%;
+    left: 33%;
+    }
+
+    .container {
+    margin: 0 auto;
+    }
+
+    .overlay {
+    z-index: 1999;
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    }
+
+    .close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #000;
+    cursor: pointer;
+    }
+
+
+
+    /* Input Styles */
+
+    .form{
+        width: 100%;
+        padding: 15px;
+        background:#f8f8f8;
+        border:1px solid rgba(0, 0, 0, 0.075);
+        margin-bottom:25px;
+        color:#727272 !important;
+        font-size:13px;
+        -webkit-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+    }
+
+    .form:hover{
+        border:1px solid #8BC3A3;
+    }
+
+    .form:focus{
+        color: white;
+        outline: none;
+        border:1px solid #8BC3A3;
+    }
+
+    .textarea{
+        height: 200px;
+        max-height: 180px;
+        max-width: 93%;
+    }
+    
+    /* Generic Button Styles */
+
+    .button{
+        padding:8px 12px;
+        background:#0A5175;
+        display: block;
+        width:120px;
+        margin:10px 0 0px 0;
+        border-radius:3px;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        text-align:center;
+        font-size:0.8em;
+        box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+    }
+
+    .button:hover{
+        background:#8BC3A3;
+        color:white;
+    }
+
+    /* Send Button Styles */
+
+    .form-btn{
+        width:180px;
+        display: block;
+        height: auto;
+        padding:15px;
+        color:#fff;
+        background:#8BC3A3;
+        border:none;
+        border-radius:3px;
+        outline: none;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        margin:auto;
+        box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+        -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+    }
+
+    .form-btn:hover{
+        background:#111;
+        color: white;
+        border:none;
+    }
+
+    .form-btn:active{
+        opacity: 0.9;
+    }
+    center{
+    margin-top:330px;
+    }
+    input {
+        position: relative;
+        z-index: 9999;
+    }
+
+
+    /* title */
+
+    .group a {
+        color: rgb(72, 72, 72);
+    }
+
+    .group a:hover {
+        color: #ff5a5f;
+        text-decoration: none;
+    }
+
+    .group a:before {
+        content: '';
+        border-bottom: solid 1px #5CAAEF;
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%;
+        
+        opacity: 0;
+    }
+
+    /* rating star */
+
+    .star-ratings-sprite {
+        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+        font-size: 0;
+        height: 21px;
+        line-height: 0;
+        overflow: hidden;
+        text-indent: -999em;
+        width: 110px;
+        margin: 0 auto;
+    }
+
+    .star-ratings-sprite-rating {
+        background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+        background-position: 0 100%;
+        float: left;
+        height: 21px;
+        display: block;
+    }
+
+    .star {
+        margin-top: 4px;
+    }
+
+    /* more */
+
+    .more a {
+        color: rgb(72, 72, 72);
+    }
+
+    .more a:hover {
+        color: #ff5a5f;
+        text-decoration: none;
+    }
+
+    .more a:before {
+        content: '';
+        border-bottom: solid 1px #5CAAEF;
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%;
+        
+        opacity: 0;
+    }
+
+</style>
+
+
+<body>
+
+    <!-- customised header -->
+
+    <div id="header">
+        <div id="nav">
+            <a href="{% url 'index' %}"><p id="logo_text">&#x2654;BeerAnA</p></a>
+            <a href="#request" class="nav_links">Requests</a>
+
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="nav_links">Logout</a>
+                <a style="margin-top: 5px;float: right;" href="{% url 'user_page' %}">
+                    <img class="sm-avatar" src="{{ user.avatar.url }}">
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav_links">Login</a>
+            {% endif %}
+
+        </div>
+
+        <div id="welcome_text_div">
+            <p id="welcome_text">Welcome NSW</p>
+            <p id="welcome_under_text">The First State The Premier State.</p>
+        </div>     
+
+
+        <!-- updated search bar -->
+
+        <!-- <div id="searchbar_div">
+            <div id="searchbar">
+                <form class="search-container">
+                    <input type="text" id="search-bar" placeholder="What can I help you with today?">
+                    <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+                </form>
+            </div>
+        </div> -->
+
+
+        <!-- new search bar -->
+    
+            <div id="searchbar_div">
+                <form id="searchbar" method="post" action="{% url 'index_search' %}">
+                    <input name="where" placeholder="Your Destination" class="where">
+                    <input name="start_date" id="dt" placeholder="Check-in" class="check_in">
+                    <input name="end_date" id="dt2" placeholder="Check-out" class="check_out">
+    
+                  <select name="guest_number" class="guest">
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guest</option>
+                    <option value="3">3 Guest</option>
+                    <option value="4">4 Guest</option>
+                    <option value="5">5 Guest</option>
+                  </select>
+    
+                  <input type="submit" value="Search" class="submitBtn" id="search_button">
+    
+                </form>
+            </div>
+          
+    </div>
+
+    <!-- select view mode -->
+    
+    <div class="container">
+
+        <!-- select modes -->
+
+        <!-- <div class="row">
+            <div class="col-lg-12 my-3">
+                <div class="btn-group float-right">
+                    <button class="btn btn-warning" id="list">
+                        List View
+                    </button>
+                    <button class="btn btn-danger" id="grid">
+                        Grid View
+                    </button>
+                </div>
+            </div>
+        </div>  -->
+
+        <br>
+        <br>
+
+        <div>
+            <p class="topic_word">Featured BeerAnA Homes</p>
+        </div> 
+
+        <!-- property demonstration row 1 -->
+
+        <div class="row view-group" id="property">
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.0.id %}">
+                            <img src='{{ properties.0.image }}' style="border-radius: 2px;width: 340px;height: 230px;">
+                        </a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                        <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.0.id %}"><strong>{{ properties.0.name }}</strong></a></h5>
+                        <p class="group block-with-text text-justify">{{ properties.0.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.0.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.0.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.1.id %}"><img src='{{ properties.1.image }}' style="border-radius: 2px;width: 340px;height: 230px;"></a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                            <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.1.id %}"><strong>{{ properties.1.name }}</strong></a></h5>
+                            <p class="group block-with-text text-justify">{{ properties.1.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.1.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.1.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.2.id %}"><img src='{{ properties.2.image }}' style="border-radius: 2px;width: 340px;height: 230px;"></a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                            <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.2.id %}"><strong>{{ properties.2.name }}</strong></a></h5>
+                            <p class="group block-with-text text-justify">{{ properties.2.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.2.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.2.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        </div>
+
+
+
+
+        <!-- property demonstration row 2 -->
+
+        <div class="row view-group" id="property">
+            
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.3.id %}"><img src='{{ properties.3.image }}' style="border-radius: 2px;width: 340px;height: 230px;"></a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                            <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.3.id %}"><strong>{{ properties.3.name }}</strong></a></h5>
+                            <p class="group block-with-text text-justify">{{ properties.3.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.3.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.3.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.4.id %}"><img src='{{ properties.4.image }}' style="border-radius: 2px;width: 340px;height: 230px;"></a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                            <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.4.id %}"><strong>{{ properties.4.name }}</strong></a></h5>
+                            <p class="group block-with-text text-justify">{{ properties.4.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.4.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.4.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.5.id %}"><img src='{{ properties.5.image }}' style="border-radius: 2px;width: 340px;height: 230px;"></a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                            <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.5.id %}"><strong>{{ properties.5.name }}</strong></a></h5>
+                            <p class="group block-with-text text-justify">{{ properties.5.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.5.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.5.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        </div>
+
+
+
+
+
+        <!-- property demonstration row 3 -->
+
+        <div class="row view-group" id="property">
+            
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.6.id %}"><img src='{{ properties.6.image }}' style="border-radius: 2px;width: 340px;height: 230px;"></a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                            <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.6.id %}"><strong>{{ properties.6.name }}</strong></a></h5>
+                            <p class="group block-with-text text-justify">{{ properties.6.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.6.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.6.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.7.id %}"><img src='{{ properties.7.image }}' style="border-radius: 2px;width: 340px;height: 230px;"></a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                            <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.7.id %}"><strong>{{ properties.7.name }}</strong></a></h5>
+                            <p class="group block-with-text text-justify">{{ properties.7.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.7.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.7.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' properties.8.id %}"><img src='{{ properties.8.image }}' style="border-radius: 2px;width: 340px;height: 230px;"></a>
+                        <div style="margin-top:4px;"></div>
+                    </div>
+                    <div class="caption card-body">
+                            <h5 class="group card-title block-with-title"><a href="{% url 'property_details' properties.8.id %}"><strong>{{ properties.8.name }}</strong></a></h5>
+                            <p class="group block-with-text text-justify">{{ properties.8.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="star">
+                                    <div class="star-ratings-sprite"><span style="width:{{ properties.8.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead float-right">
+                                ${{ properties.8.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        </div>
+
+
+        <br>
+        <a name="request"></a>
+        <div class="row">
+            <div style="width: 100%;">
+                <div style="float: left;"><p class="topic_word">BeerAnA Home Requests</p></div>
+                <div class="more" style="float: right; padding: 20px 70px 0 0;"><strong><i><a href="{% url 'requests_more' %}">>>More</a></i></strong></div>
+            </div>
+        </div> 
+        <br>
+
+        {% for reqs in user_requests %}
+
+        <div class="row">
+
+            {% for entry in reqs %}
+            
+            <div class="col-xs-3 col-lg-3">
+            <figure class="req_form"><img src="media/{{ entry.poster.avatar }}" class="profile"/>
+            {% if user.is_authenticated %}
+            <a style="position: relative; right: -50px; top: 10px;"><i class="fa fa-comment" style="color:gray;" onclick="addComment('{{entry.poster.id}}');"></i></a>
+            {% endif %}
+            <figcaption>
+                <h3><span style="font-size: 16px;">{{ entry.poster.username }}, 
+                {% if entry.poster.gender == 'M' %}
+                Male
+                {% elif entry.poster.gender == 'F' %}
+                Female
+                {% else %}
+                Unknow
+                {% endif %}
+                </span></h3>
+                <h3>Rent Budget: <span>${{ entry.budget }}/Day</span></h3>
+                <h3>Preferred City: <span>{{ entry.prefer_city }}</span></h3>
+                <h3>Move Day: <span>{{ entry.move_day }}</span></h3>
+            </figcaption>
+            </figure>
+            </div>
+            {% endfor %}
+            
+        </div>
+        
+        <br>
+
+        {% endfor %}
+
+
+    </div>
+
+
+<div class="pop-window" style="display: none;">
+    <div class="inner">
+        <div class="contact-form">
+                <!-- Right Inputs -->
+                <div class="col-xs-12 wow animated slideInRight" data-wow-delay=".5s">
+                    <!-- Message -->
+                    <textarea name="message" id="message" class="form textarea"  placeholder="Leave a message..." style="min-width: 100%;"></textarea>
+                </div><!-- End Right Inputs -->
+                <!-- Bottom Submit -->
+                <div class="relative fullwidth col-xs-12">
+                    <!-- Send Button -->
+                    <button class="form-btn semibold" onclick="send_to();">Send</button> 
+                </div><!-- End Bottom Submit -->
+                <!-- Clear -->
+                <div class="clear"></div>
+        </div><!-- End Contact Form Area -->
+    </div>
+    <!-- <div class="close">x</div> -->
+</div>
+ 
+
+
+<div id="footer">
+    <footer>
+        <div class="container_2">
+            <div class="col-md-12" style="height: 40px"></div>
+            <div class="row_2" >
+            <hr />
+            <div class="text-center">
+            <h6>Join Us On!</h6>
+                <a href=""><i class="fa fa-facebook"></i></a>
+            <a href="" style="width: 41px; height: 41px;"><i class="fa fa-google-plus"></i></a>
+            <a href="" style="width: 41px; height: 41px;"><i class="fa fa-vk"></i></a>
+            <a href="" style="width: 41px; height: 41px;"><i class="fa fa-twitter"></i></a>
+            <a href="" style="width: 41px; height: 41px;"><i class="fa fa-github"></i></a>
+            <a href="" style="width: 41px; height: 41px;"><i class="fa fa-youtube-play"></i></a>
+            <a href="" style="width: 41px; height: 41px;"><i class="fa fa-instagram"></i></a>
+            </div>
+            </div>
+    </footer>
+</div>
+
+
+
+
+
+
+
+
+
+
+    <!-- for view modes -->
+
+    <script>
+
+    $(document).ready(function() {
+                $('#list').click(function(event){event.preventDefault();$('#property .item').addClass('list-group-item');});
+                $('#grid').click(function(event){event.preventDefault();$('#property .item').removeClass('list-group-item');});
+            });
+    </script>
+
+
+    <!-- for search bar -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
+
+    <script>
+        rome(dt, {
+            dateValidator: rome.val.beforeEq(dt2),
+            time:false,
+        });
+
+        rome(dt2, {
+            dateValidator: rome.val.afterEq(dt),
+            time:false,
+        });
+        
+        $(".flex-form").submit(function(){    $(".submitBtn").attr("disabled", true);                               return true;
+        });
+    </script>
+
+
+    <script>
+        var uid = -1;
+        var $overlay = $('<div class="overlay"></div>');
+        var $popup = $('.pop-window');
+      
+        // $('<div class="close">x</div>').appendTo($popup);
+        // $popup.hide();
+      
+        function addComment(id) {
+          $overlay.fadeIn(800).appendTo('body');
+          $popup.delay(800).slideDown();
+          uid = id;
+        };
+      
+        $overlay.click(function () {
+          $overlay.delay(800).fadeOut();
+          $popup.slideUp();
+        });
+      
+        $('.close').click(function () {
+          $popup.slideUp();
+          $overlay.delay(800).fadeOut();
+        });
+
+        function send_to() {
+            var content = $('#message').val();
+            $.post("{% url 'send_to' %}", 
+            {
+                receiver: uid,
+                msg: content
+            },function(data, status) {
+                if(data == '1') {
+                    $('#message').val('');
+                    alert("send succeed!");
+                    $overlay.delay(800).fadeOut();
+                    $popup.slideUp();
+                } else {
+                    alert('send failed');
+                }
+            });
+        }
+      
+      </script>
+</body>
+
+</html>

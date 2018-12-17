@@ -1,0 +1,236 @@
+{% extends "user/base.html" %}
+
+{% block page_style %}
+<style>
+.view-group {
+    display: -ms-flexbox;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.thumbnail
+{
+    margin-bottom: 30px;
+    padding: 10px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    min-width: 95%;
+}
+
+.item.list-group-item
+{
+    float: none;
+    width: 100%;
+    /*background-color: #fff;*/
+    background-color: transparent;
+    margin-bottom: 30px;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    border: 0;
+}
+.item.list-group-item .img-event {
+    float: left;
+    /* width: 20%;
+    height: 20%; */
+}
+
+.item.list-group-item .list-group-image
+{
+    margin-right: 10px;
+
+}
+.item.list-group-item .thumbnail
+{
+    margin-bottom: -7px;
+    margin-left: -16px;
+    margin-right: -17px;
+    display: inline-block;
+}
+.item.list-group-item .caption
+{
+    float: left;
+    width: 70%;
+    margin: 0;
+}
+
+.item.list-group-item:before, .item.list-group-item:after
+{
+    display: table;
+    content: " ";
+}
+
+.item.list-group-item:after
+{
+    clear: both;
+}
+
+body {
+    background: url(media/static/assets/background.001.jpeg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.imgsize {
+    width:100%;
+    height: 200px;
+}
+
+.card {
+    background-color: transparent;
+    border: none;
+}
+
+.block-with-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical; 
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1.5rem;
+}
+
+.block-with-title {
+    line-height: 1.5em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 2rem;
+}
+
+
+/* paginator */
+.pagination{
+    display: flex;
+  justify-content: center;
+}
+
+.page_ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.page_a{
+  display: inline-block;
+  color: #222;
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  text-align: center;
+}
+
+.page_a .is-active{
+  background-color: #2ecc71;
+  border-radius: 100%;
+  color: #fff;
+}
+
+/* rating star */
+
+.star-ratings-sprite {
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+    font-size: 0;
+    height: 21px;
+    line-height: 0;
+    overflow: hidden;
+    text-indent: -999em;
+    width: 110px;
+    margin: 0 auto;
+}
+
+.star-ratings-sprite-rating {
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+    background-position: 0 100%;
+    float: left;
+    height: 21px;
+    display: block;
+}
+
+.star {
+    margin-top: 4px;
+    align-items: left;
+}
+
+</style>
+{% endblock %}
+
+
+{% block body_contents %}
+<div class="container">
+    <div class="view-group" id="property">
+        {% for entry in property_list %}
+            <div class="item col-xs-4 col-lg-4 list-group-item">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <a href="{% url 'property_details' entry.id %}">
+                        <img src='{{ entry.image }}' style="border-radius: 5px;width: 280px;height: 180px;">
+                        <div style="margin-top:4px;"></div>
+                        </a>
+                    </div>
+                    <div class="caption card-body">
+                        <a href="{% url 'property_details' entry.id %}">
+                            <h5 class="group card-title block-with-title"><strong>{{ entry.name }}</strong></h5>
+                        </a>
+                        <p class="group block-with-text text-justify">{{ entry.description }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6" style="text-align: left;">
+                                <div class="star" style="text-align: left;">
+                                    <div class="star-ratings-sprite"><span style="width:{{ entry.star_rate }}%" class="star-ratings-sprite-rating"></span></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead" style="text-align:right">
+                                ${{ entry.daily_price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="pagination">
+    <ul class="page_ul">
+        {% if request.GET.paginator %}
+        <a href="/app/search?keywords={{ request.GET.keywords }}&page=1" class="page_a"><li>First</li></a>
+        {% endif %}
+        {% if property_list.has_previous %}
+                <a href="/app/search?keywords={{ request.GET.keywords }}&page={{ property_list.previous_page_number }}" class="page_a"><li><</li></a>
+         {% endif %}
+
+         {% for num in property_list.paginator.page_range %}
+            <a href="/app/search?keywords={{ request.GET.keywords }}&page={{ num }}" class="page_a">
+                <li {% ifequal num property_list.number|add:"0" %}class="is-active"{% endifequal %} >{{ num }}</li>
+            </a>
+         {% endfor %}
+
+        {% if property_list.has_next %}
+             <a href="/app/search?keywords={{ request.GET.keywords }}&page={{ property_list.next_page_number }}" class="page_a"><li>></li></a>
+        {% endif %}
+        {% if request.GET.paginator %}
+        <a href="/app/search?keywords={{ request.GET.keywords }}&page={{ property_list.paginator.num_pages }}" class="page_a"><li>Last</li></a>
+        {% endif %}
+     </ul>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+
+
+{% endblock %}
